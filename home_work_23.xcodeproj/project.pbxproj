@@ -13,6 +13,7 @@
 		CC54D5B0285F3844005A4942 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC54D5AE285F3844005A4942 /* Main.storyboard */; };
 		CC54D5B2285F3846005A4942 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC54D5B1285F3846005A4942 /* Assets.xcassets */; };
 		CC54D5B5285F3846005A4942 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC54D5B3285F3846005A4942 /* LaunchScreen.storyboard */; };
+		CC54D5BD285F4B26005A4942 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC54D5BC285F4B26005A4942 /* Weather.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		CC54D5B1285F3846005A4942 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CC54D5B4285F3846005A4942 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CC54D5B6285F3846005A4942 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CC54D5BC285F4B26005A4942 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				CC54D5A8285F3844005A4942 /* AppDelegate.swift */,
 				CC54D5AA285F3844005A4942 /* SceneDelegate.swift */,
 				CC54D5AC285F3844005A4942 /* ViewController.swift */,
+				CC54D5BC285F4B26005A4942 /* Weather.swift */,
 				CC54D5AE285F3844005A4942 /* Main.storyboard */,
 				CC54D5B1285F3846005A4942 /* Assets.xcassets */,
 				CC54D5B3285F3846005A4942 /* LaunchScreen.storyboard */,
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC54D5BD285F4B26005A4942 /* Weather.swift in Sources */,
 				CC54D5AD285F3844005A4942 /* ViewController.swift in Sources */,
 				CC54D5A9285F3844005A4942 /* AppDelegate.swift in Sources */,
 				CC54D5AB285F3844005A4942 /* SceneDelegate.swift in Sources */,
