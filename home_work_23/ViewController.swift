@@ -8,11 +8,18 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    var valueKey: String?
     override func viewDidLoad() {
         super.viewDidLoad()
         // адрес сервера
-        if let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?q=London&appid=3b0d514cd0fcc25c0056ef824e4464ad") {
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        if let appDelegate = appDelegate {
+            valueKey = appDelegate.valueApi
+        }
+        guard let valueKey = valueKey else {
+            return
+        }
+        if let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?q=London&appid=\(valueKey)") {
          // запрос
             var urlRequest = URLRequest(url: url)
             // тип запроса
