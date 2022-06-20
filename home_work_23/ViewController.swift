@@ -8,19 +8,21 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var valueKey: String?
+    var nameCity: String?
+    var key: String? {
+        get {
+            Bundle.main.infoDictionary?["API_KEY"] as? String
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // адрес сервера
-        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        if let appDelegate = appDelegate {
-            valueKey = appDelegate.valueApi
-        }
-        guard let valueKey = valueKey else {
+        nameCity = "London"
+        guard let nameCity = nameCity, let key = key else {
             return
         }
-        if let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?q=London&appid=\(valueKey)") {
-         // запрос
+        if let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?q=\(nameCity)&appid=\(key)") {
+            // запрос
             var urlRequest = URLRequest(url: url)
             // тип запроса
             urlRequest.httpMethod = "GET"
@@ -32,7 +34,7 @@ class ViewController: UIViewController {
                 if let data = data {
                     let weather = try! JSONDecoder().decode(Weather.self, from: data)
                     print(weather)
-                   // let data = try! JSONEncoder().encode(weather)
+                    // let data = try! JSONEncoder().encode(weather)
                     // print(data)
                 }
                 if let error = error {
@@ -44,7 +46,5 @@ class ViewController: UIViewController {
             task.resume()
         }
     }
-
-
 }
 
