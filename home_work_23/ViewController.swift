@@ -8,6 +8,20 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    @IBOutlet weak var sunrise: UILabel!
+    @IBOutlet weak var sunset: UILabel!
+    @IBOutlet weak var temp: UILabel!
+    @IBOutlet weak var feelsLike: UILabel!
+    @IBOutlet weak var pressure: UILabel!
+    @IBOutlet weak var humidity: UILabel!
+    @IBOutlet weak var clouds: UILabel!
+    @IBOutlet weak var visibility: UILabel!
+    @IBOutlet weak var windSpeed: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
+    
+    var latitude: Double!
+    var longitude: Double!
     var nameCity: String?
     var key: String? {
         get {
