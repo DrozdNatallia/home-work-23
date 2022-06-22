@@ -35,7 +35,8 @@ class ViewController: UIViewController {
         guard let nameCity = nameCity, let key = key else {
             return
         }
-        if let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?q=\(nameCity)&appid=\(key)") {
+        // запрос для получения координат
+        if let url = URL(string: "https://api.openweathermap.org/geo/1.0/direct?q=\(nameCity)&limit=2&appid=\(key)") {
             // запрос
             var urlRequest = URLRequest(url: url)
             // тип запроса
