@@ -47,10 +47,49 @@ class ViewController: UIViewController {
                     print(response)
                 }
                 if let data = data {
-                    let weather = try! JSONDecoder().decode(Weather.self, from: data)
-                    print(weather)
-                    // let data = try! JSONEncoder().encode(weather)
-                    // print(data)
+                    let info = try! JSONDecoder().decode([InfoCity].self, from: data)
+                    
+// MARK: Запрос на получение данных о погоде
+                        // координаты получаем из предыдушего запроса
+                    if let url = URL(string: "https://api.openweathermap.org/data/2.5/onecall?lat=\(info[0].lat)&lon=\(info[0].lon)&exclude=minutely,alerts&appid=\(key)") {
+                        var urlRequest = URLRequest(url: url)
+                        urlRequest.httpMethod = "GET"
+                        let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+                            if let response = response {
+                                print(response)
+                            }
+                            if let data = data {
+                                let currentWeather = try! JSONDecoder().decode(Weather.self, from: data)
+                                // присваиваем значения лэйблам
+                                DispatchQueue.main.async {
+                                    self.clouds.text = "\(currentWeather.current.clouds)"
+                                    self.sunset.text = "\(currentWeather.current.sunset ?? 0)"
+                                    self.sunrise.text = "\(currentWeather.current.sunrise ?? 0)"
+                                    self.visibility.text = "\(currentWeather.current.visibility)"
+                                    self.humidity.text = "\(currentWeather.current.humidity)"
+                                    self.temp.text = "\(currentWeather.current.temp)"
+                                    self.pressure.text = "\(currentWeather.current.pressure)"
+                                    self.windSpeed.text = "\(currentWeather.current.windSpeed)"
+                                    self.feelsLike.text = "\(currentWeather.current.feelsLike)"
+                                    // присваиваем значения для иконки
+                                    let icon = currentWeather.current.weather[0].icon.rawValue
+                                    // добавляем иконку по URL
+                                    if let url = URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png") {
+                                        do {
+                                            let data = try Data(contentsOf: url)
+                                            self.imageView.image = UIImage(data: data)
+                                        } catch _ {
+                                            print("error")
+                                        }
+                                    }
+                                }
+                            }
+                            if let error = error {
+                                print(error)
+                            }
+                        }
+                        task.resume()
+                    }
                 }
                 if let error = error {
                     print(error)
