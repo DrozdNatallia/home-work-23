@@ -65,23 +65,13 @@ struct WeatherElement: Codable {
     let id: Int
     let main: Main
     let weatherDescription: Description
-    let icon: Icon
+    let icon: String
 
     enum CodingKeys: String, CodingKey {
         case id, main
         case weatherDescription = "description"
         case icon
     }
-}
-
-enum Icon: String, Codable {
-    case the01D = "01d"
-    case the01N = "01n"
-    case the02D = "02d"
-    case the03D = "03d"
-    case the04D = "04d"
-    case the04N = "04n"
-    case the10D = "10d"
 }
 
 enum Main: String, Codable {
@@ -95,6 +85,7 @@ enum Description: String, Codable {
     case clearSky = "clear sky"
     case fewClouds = "few clouds"
     case lightRain = "light rain"
+    case moderateRain = "moderate rain"
     case overcastClouds = "overcast clouds"
     case scatteredClouds = "scattered clouds"
 }
@@ -112,8 +103,9 @@ struct Daily: Codable {
     let windGust: Double
     let weather: [WeatherElement]
     let clouds: Int
-    let pop, uvi: Double
+    let pop: Double
     let rain: Double?
+    let uvi: Double
 
     enum CodingKeys: String, CodingKey {
         case dt, sunrise, sunset, moonrise, moonset
@@ -125,7 +117,7 @@ struct Daily: Codable {
         case windSpeed = "wind_speed"
         case windDeg = "wind_deg"
         case windGust = "wind_gust"
-        case weather, clouds, pop, uvi, rain
+        case weather, clouds, pop, rain, uvi
     }
 }
 

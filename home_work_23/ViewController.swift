@@ -47,9 +47,13 @@ class ViewController: UIViewController {
                     print(response)
                 }
                 if let data = data {
+                    print ("++++++++++++++++++++++++++++++++++++++++")
+                    print(String(decoding: data, as: UTF8.self))
                     let info = try! JSONDecoder().decode([InfoCity].self, from: data)
                     
 // MARK: Запрос на получение данных о погоде
+                    // проверка на пустоту в инфо
+                    guard info.isEmpty == false else { return }
                         // координаты получаем из предыдушего запроса
                     if let url = URL(string: "https://api.openweathermap.org/data/2.5/onecall?lat=\(info[0].lat)&lon=\(info[0].lon)&exclude=minutely,alerts&appid=\(key)") {
                         var urlRequest = URLRequest(url: url)
@@ -59,6 +63,7 @@ class ViewController: UIViewController {
                                 print(response)
                             }
                             if let data = data {
+                                //print(String(decoding: data, as: UTF8.self))
                                 let currentWeather = try! JSONDecoder().decode(Weather.self, from: data)
                                 // присваиваем значения лэйблам
                                 DispatchQueue.main.async {
@@ -71,8 +76,12 @@ class ViewController: UIViewController {
                                     self.pressure.text = "\(currentWeather.current.pressure)"
                                     self.windSpeed.text = "\(currentWeather.current.windSpeed)"
                                     self.feelsLike.text = "\(currentWeather.current.feelsLike)"
+                                    
+                                    guard currentWeather.current.weather.isEmpty == false else {
+                                        return
+                                    }
                                     // присваиваем значения для иконки
-                                    let icon = currentWeather.current.weather[0].icon.rawValue
+                                    let icon = currentWeather.current.weather[0].icon
                                     // добавляем иконку по URL
                                     if let url = URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png") {
                                         do {
