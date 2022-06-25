@@ -1,0 +1,56 @@
+//
+//  AlamofireProvader.swift
+//  home_work_23
+//
+//  Created by Natalia Drozd on 25.06.22.
+//
+
+import Foundation
+import Alamofire
+
+class AlamofireProvaider: RestAPIProviderProtocol {
+    
+    var key: String? {
+        get {
+            Bundle.main.infoDictionary?["API_KEY"] as? String
+        }
+    }
+    
+    func getCoordinatesByName(name: String, completion: @escaping (Result<[InfoCity], Error>) -> Void) {
+        let params = addParams(queryItems: ["q": name])
+        
+        AF.request(Constants.getCodingURL, method: .get, parameters: params).responseDecodable(of: [InfoCity].self) { response in
+            switch response.result {
+            case .success(let result):
+                completion(.success(result))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func getWeatherForCityCoordinates(lat: Double, lon: Double, completion: @escaping (Result<WeatherData, Error>) -> Void) {
+        let params = addParams(queryItems: ["lat": lat.description, "lon": lon.description, "exlcude":"minutely,alerts", "units" : "metric"])
+        
+        AF.request(Constants.weatherURL, method: .get, parameters: params).responseDecodable(of: WeatherData.self){ response in
+            switch response.result {
+            case .success(let result):
+                completion(.success(result))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    private func addParams(queryItems: [String: String]) -> [String: String] {
+        var params: [String: String] = [:]
+        params = queryItems
+        if let key = key  {
+            print(key)
+            params["appid"] = "\(key)"
+            return params
+        }
+        return params
+    }
+}
+        
