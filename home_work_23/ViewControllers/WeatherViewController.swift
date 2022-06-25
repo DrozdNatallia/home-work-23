@@ -40,7 +40,6 @@ class WeatherViewController: UIViewController {
                     self.getWeatherByCoordinates(city: city)
                 }
             case .failure(let error):
-                print("BAD1")
                 print(error.localizedDescription)
             }
         }
