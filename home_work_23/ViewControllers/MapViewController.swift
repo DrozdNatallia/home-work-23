@@ -25,7 +25,7 @@ class MapViewController: UIViewController {
         view = mapView
     }
     
-   func getWeatherByCoordinates(coord: CLLocationCoordinate2D) {
+    func getWeatherByCoordinates(coord: CLLocationCoordinate2D) {
         apiProvider.getWeatherForCityCoordinates(lat: coord.latitude, lon: coord.longitude) { result in
             switch result {
             case .success(let value):
