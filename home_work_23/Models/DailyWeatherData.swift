@@ -24,7 +24,7 @@ struct DailyWeatherData: Codable {
     var windGust: Double?
     var weather: [WeatherDaily]?
     var clouds: Int?
-    var pop: Int?
+    var pop: Double?
     var rain: Double?
     var uvi: Double?
     
