@@ -10,6 +10,7 @@
 		A80A51B2D6AE4A05D3E092F1 /* Pods_home_work_23.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F0F180ACDD77A75F4B010EF /* Pods_home_work_23.framework */; };
 		CC304850286365EF004DF315 /* InfoCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC30484F286365EF004DF315 /* InfoCity.swift */; };
 		CC30485328638340004DF315 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CC30485228638340004DF315 /* Alamofire */; };
+		CC471716286875D200122832 /* MapViewControllers + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC471715286875D200122832 /* MapViewControllers + extension.swift */; };
 		CC54D5A9285F3844005A4942 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC54D5A8285F3844005A4942 /* AppDelegate.swift */; };
 		CC54D5AB285F3844005A4942 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC54D5AA285F3844005A4942 /* SceneDelegate.swift */; };
 		CC54D5AD285F3844005A4942 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC54D5AC285F3844005A4942 /* WeatherViewController.swift */; };
@@ -30,6 +31,7 @@
 		574E34DB2A4E3A9B2AD5046F /* Pods-home_work_23.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-home_work_23.debug.xcconfig"; path = "Target Support Files/Pods-home_work_23/Pods-home_work_23.debug.xcconfig"; sourceTree = "<group>"; };
 		5F0F180ACDD77A75F4B010EF /* Pods_home_work_23.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_home_work_23.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC30484F286365EF004DF315 /* InfoCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCity.swift; sourceTree = "<group>"; };
+		CC471715286875D200122832 /* MapViewControllers + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapViewControllers + extension.swift"; sourceTree = "<group>"; };
 		CC54D5A5285F3844005A4942 /* home_work_23.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = home_work_23.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC54D5A8285F3844005A4942 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC54D5AA285F3844005A4942 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +90,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		CC471717286875E500122832 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CC471715286875D200122832 /* MapViewControllers + extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		CC54D59C285F3844005A4942 = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +125,7 @@
 				CC8A475D2867572200C427B3 /* Services */,
 				CC8A475C286756FF00C427B3 /* Protocols */,
 				CC8A47552867286400C427B3 /* Constants.swift */,
+				CC471717286875E500122832 /* Extensions */,
 				CC3048542863B212004DF315 /* Models */,
 				CC54D5AE285F3844005A4942 /* Main.storyboard */,
 				CC54D5B1285F3846005A4942 /* Assets.xcassets */,
@@ -277,6 +288,7 @@
 				CC8A475A2867557000C427B3 /* RestAPIProviderProtocol.swift in Sources */,
 				CC54D5AB285F3844005A4942 /* SceneDelegate.swift in Sources */,
 				CC304850286365EF004DF315 /* InfoCity.swift in Sources */,
+				CC471716286875D200122832 /* MapViewControllers + extension.swift in Sources */,
 				CC8A475828672B1000C427B3 /* AlamofireProvaider.swift in Sources */,
 				CC8A47542867252100C427B3 /* DailyWeatherData.swift in Sources */,
 				CC8A47522867250200C427B3 /* HourlyWeatherData.swift in Sources */,

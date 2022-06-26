@@ -24,11 +24,11 @@ class WeatherViewController: UIViewController {
     
     var latitude: Double!
     var longitude: Double!
-    var nameCity: String?
+//    var nameCity: String?
     override func viewDidLoad() {
         super.viewDidLoad()
             apiProvider = AlamofireProvaider()
-        getCoordinatesByName()
+            getCoordinatesByName()
     }
     
     fileprivate func getCoordinatesByName() {
@@ -45,13 +45,29 @@ class WeatherViewController: UIViewController {
         }
     }
     
+    func convertUnix(unixTime: inout Int) -> String {
+        let newDate = Date(timeIntervalSince1970: TimeInterval(unixTime))
+        let formatted = DateFormatter()
+        formatted.dateStyle = .none
+        formatted.timeStyle = .medium
+        let formattedTime = formatted.string(from: newDate)
+        return formattedTime
+    }
+    
     private func getWeatherByCoordinates(city: InfoCity) {
         apiProvider.getWeatherForCityCoordinates(lat: city.lat, lon: city.lon) { result in
             switch result {
             case .success(let value):
-               // updateUI(value.current)
-                guard let current = value.current, let weather = current.weather, let icon = weather.first?.icon, let temp = current.temp else {return}
+                guard let current = value.current, let weather = current.weather, let icon = weather.first?.icon, let temp = current.temp, var sunrise = current.sunrise, var sunset = current.sunset, let windSpeed = current.windSpeed, let feelsLike = current.feelsLike, let clouds = current.clouds, let humidity = current.humidity, let pressure = current.pressure, let visibility = current.visibility else {return}
                 self.temp.text = temp.description + "°"
+                self.sunrise.text = self.convertUnix(unixTime: &sunrise)
+                self.sunset.text = self.convertUnix(unixTime: &sunset)
+                self.windSpeed.text = windSpeed.description + "m/s"
+                self.feelsLike.text = feelsLike.description + "°"
+                self.humidity.text = humidity.description + "%"
+                self.pressure.text = pressure.description + "hPa"
+                self.visibility.text = visibility.description + "km"
+                self.clouds.text = clouds.description
                 if let url = URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png") {
                     do {
                         let data = try Data(contentsOf: url)
