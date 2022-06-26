@@ -22,28 +22,28 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
             switch key {
             case .current:
                 guard let temp = temp, let sunset = sunset, let sunrise = sunrise, let humidity = humidity, let windSpeed = windSpeed, let image = weatherImage else {return cell}
-                cell.windSpeed.text = "Wind speed: " + windSpeed.description + "m/s"
-                cell.sunset.text = "Sunset: " + sunset
-                cell.sunrise.text = "Sunrise: " + sunrise
-                cell.humidity.text = "Humidity: " + humidity.description + "%"
-                cell.temp.text = "Temp: " + temp.description + "°"
+                cell.windSpeed.text = "Wind speed: \(windSpeed) m/s"
+                cell.sunset.text = "Sunset: \(sunset)"
+                cell.sunrise.text = "Sunrise: \(sunrise)"
+                cell.humidity.text = "Humidity: \(humidity) %"
+                cell.temp.text = "Temp: \(temp) °"
                 cell.weatherImageView.image = image
                 
             case.daily:
                 guard let temp = dailyTemp, let sunset = dailySunset, let sunrise = dailySunrise, let humidity = dailyHumidity, let windSpeed = dailyWindSpeed, let image = dailyWeatherImage else {return cell}
-                cell.windSpeed.text = "Wind speed: " + windSpeed.description + "m/s"
-                cell.sunset.text = "Sunset: " + sunset
-                cell.sunrise.text = "Sunrise: " + sunrise
-                cell.humidity.text = "Humidity: " + humidity.description + "%"
-                cell.temp.text = "Temp: " + temp.description + "°"
+                cell.windSpeed.text = "Wind speed: \(windSpeed) m/s"
+                cell.sunset.text = "Sunset: \(sunset)"
+                cell.sunrise.text = "Sunrise: \(sunrise)"
+                cell.humidity.text = "Humidity: \(humidity) %"
+                cell.temp.text = "Temp: \(temp) °"
                 cell.weatherImageView.image = image
             default:
                 guard let hourlyHumidity = hourlyHumidity, let hourlyMaxTemp = hourlyTemp, let hourlyUvi = hourlyUvi, let hourlyPressure = hourlyPressure, let hourlyWindSpeed = hourlyWindSpeed, let image = hourlyWeatherImage else { return cell}
-                cell.windSpeed.text = "Wind speed: " + hourlyWindSpeed.description + "m/s"
-                cell.sunset.text = "Pressure: " + hourlyPressure.description
-                cell.sunrise.text = "Uvi: " + hourlyUvi.description
-                cell.humidity.text = "Humidity: " + hourlyHumidity.description + "%"
-                cell.temp.text = "Temp: " + hourlyMaxTemp.description + "°"
+                cell.windSpeed.text = "Wind speed: \(hourlyWindSpeed) m/s"
+                cell.sunset.text = "Pressure: \(hourlyPressure)"
+                cell.sunrise.text = "Uvi: \(hourlyUvi)"
+                cell.humidity.text = "Humidity: \(hourlyHumidity) %"
+                cell.temp.text = "Temp: \(hourlyMaxTemp) °"
                 cell.weatherImageView.image = image
                 
             }
