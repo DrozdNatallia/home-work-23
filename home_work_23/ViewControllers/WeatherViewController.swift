@@ -92,24 +92,54 @@ class WeatherViewController: UIViewController {
         apiProvider.getWeatherForCityCoordinates(lat: city.lat, lon: city.lon) { result in
             switch result {
             case .success(let value):
-                guard let current = value.current, let weather = current.weather, let icon = weather.first?.icon, let temp = current.temp, var sunrise = current.sunrise, var sunset = current.sunset, let windSpeed = current.windSpeed, let feelsLike = current.feelsLike, let clouds = current.clouds, let humidity = current.humidity, let pressure = current.pressure, let visibility = current.visibility else {return}
-                self.temp.text = temp.description + "°"
-                self.sunrise.text = self.convertUnix(unixTime: &sunrise)
-                self.sunset.text = self.convertUnix(unixTime: &sunset)
-                self.windSpeed.text = windSpeed.description + "m/s"
-                self.feelsLike.text = feelsLike.description + "°"
-                self.humidity.text = humidity.description + "%"
-                self.pressure.text = pressure.description + "hPa"
-                self.visibility.text = visibility.description + "km"
-                self.clouds.text = clouds.description
+                guard let current = value.current, let weather = current.weather, let icon = weather.first?.icon, let temp = current.temp, var sunrise = current.sunrise, var sunset = current.sunset, let windSpeed = current.windSpeed, let humidity = current.humidity else {return}
+                self.temp = temp
+                self.sunrise = self.convertUnix(unixTime: &sunrise)
+                self.sunset = self.convertUnix(unixTime: &sunset)
+                self.windSpeed = windSpeed
+                self.humidity = humidity
+                self.tableView.reloadData()
                 if let url = URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png") {
                     do {
                         let data = try Data(contentsOf: url)
-                        self.imageView.image = UIImage(data: data)
+                        self.weatherImage = UIImage(data: data)
                     } catch _ {
                         print("error")
                     }
                 }
+                
+                // MARK: Hourly
+                guard let hourly = value.daily, let weather = hourly.first?.weather, let icon = weather.first?.icon, let hourlyHumidity = hourly.first?.humidity, let hourlyMaxTemp = hourly.first?.temp?.max, let hourlyPressure = hourly.first?.pressure, let hourlyUvi = hourly.first?.uvi, let hourlyWindSpeed = hourly.first?.windSpeed else {return }
+                self.hourlyTemp = hourlyMaxTemp
+                self.hourlyHumidity = hourlyHumidity
+                self.hourlyPressure = hourlyPressure
+                self.hourlyUvi = hourlyUvi
+                self.hourlyWindSpeed = hourlyWindSpeed
+                if let url = URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png") {
+                    do {
+                        let data = try Data(contentsOf: url)
+                        self.hourlyWeatherImage = UIImage(data: data)
+                    } catch _ {
+                        print("error")
+                    }
+                }
+                
+                // MARK: DAILY
+                guard let daily = value.daily, let weather = daily.first?.weather, let icon = weather.first?.icon, let temp = daily.first?.temp, let maxTemp = temp.max, let dailyHumidity = daily.first?.humidity, var dailySunrise = daily.first?.sunrise, var dailySunset = daily.first?.sunset, let dailyWindSpeed = daily.first?.windSpeed else {return }
+                self.dailyTemp = maxTemp
+                self.dailyHumidity = dailyHumidity
+                self.dailySunrise = self.convertUnix(unixTime: &dailySunrise)
+                self.dailySunset = self.convertUnix(unixTime: &dailySunset)
+                self.dailyWindSpeed = dailyWindSpeed
+                if let url = URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png") {
+                    do {
+                        let data = try Data(contentsOf: url)
+                        self.dailyWeatherImage = UIImage(data: data)
+                    } catch _ {
+                        print("error")
+                    }
+                }
+                self.tableView.reloadData()
             case .failure(let error):
                 print(error)
             }
