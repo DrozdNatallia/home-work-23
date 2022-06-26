@@ -89,16 +89,16 @@ class WeatherViewController: UIViewController {
     }
     
     private func getWeatherByCoordinates(city: InfoCity) {
-        apiProvider.getWeatherForCityCoordinates(lat: city.lat, lon: city.lon) { result in
+        apiProvider.getWeatherForCityCoordinates(lat: city.lat, lon: city.lon) { [weak self] result in
+            guard let self = self else {return}
             switch result {
             case .success(let value):
-                guard let current = value.current, let weather = current.weather, let icon = weather.first?.icon, let temp = current.temp, var sunrise = current.sunrise, var sunset = current.sunset, let windSpeed = current.windSpeed, let humidity = current.humidity else {return}
+                guard let current = value.current, let weather = current.weather, let icon = weather.first?.icon, let temp = current.temp, let sunrise = current.sunrise, let sunset = current.sunset, let windSpeed = current.windSpeed, let humidity = current.humidity else {return}
                 self.temp = temp
-                self.sunrise = self.convertUnix(unixTime: &sunrise)
-                self.sunset = self.convertUnix(unixTime: &sunset)
+                self.sunrise = self.convertUnix(unixTime: sunrise)
+                self.sunset = self.convertUnix(unixTime: sunset)
                 self.windSpeed = windSpeed
                 self.humidity = humidity
-                self.tableView.reloadData()
                 if let url = URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png") {
                     do {
                         let data = try Data(contentsOf: url)
