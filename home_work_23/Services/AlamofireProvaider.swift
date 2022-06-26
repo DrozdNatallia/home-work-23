@@ -46,7 +46,6 @@ class AlamofireProvaider: RestAPIProviderProtocol {
         var params: [String: String] = [:]
         params = queryItems
         if let key = key  {
-            print(key)
             params["appid"] = "\(key)"
             return params
         }

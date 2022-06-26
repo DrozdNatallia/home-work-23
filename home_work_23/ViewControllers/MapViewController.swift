@@ -10,7 +10,6 @@ import GoogleMaps
 import CoreLocation
 
 class MapViewController: UIViewController {
-   // var coordinate
     private var apiProvider: RestAPIProviderProtocol!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,11 +25,10 @@ class MapViewController: UIViewController {
         view = mapView
     }
     
-    private func getWeatherByCoordinates(coord: CLLocationCoordinate2D) {
+   func getWeatherByCoordinates(coord: CLLocationCoordinate2D) {
         apiProvider.getWeatherForCityCoordinates(lat: coord.latitude, lon: coord.longitude) { result in
             switch result {
             case .success(let value):
-               // updateUI(value.current)
                 guard let current = value.current, let temp = current.temp else {return}
                 let alert = UIAlertController(title: "Температура:", message: temp.description, preferredStyle: .alert)
                 let okButton = UIAlertAction(title: "OK", style: .cancel)
@@ -44,8 +42,3 @@ class MapViewController: UIViewController {
 
 }
 
-extension MapViewController: GMSMapViewDelegate {
-    func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
-        getWeatherByCoordinates(coord: coordinate)
-    }
-}
