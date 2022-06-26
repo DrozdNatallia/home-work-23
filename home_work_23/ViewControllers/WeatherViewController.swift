@@ -79,7 +79,7 @@ class WeatherViewController: UIViewController {
         }
     }
     
-    func convertUnix(unixTime: inout Int) -> String {
+    func convertUnix(unixTime: Int) -> String {
         let newDate = Date(timeIntervalSince1970: TimeInterval(unixTime))
         let formatted = DateFormatter()
         formatted.dateStyle = .none
@@ -125,11 +125,11 @@ class WeatherViewController: UIViewController {
                 }
                 
                 // MARK: DAILY
-                guard let daily = value.daily, let weather = daily.first?.weather, let icon = weather.first?.icon, let temp = daily.first?.temp, let maxTemp = temp.max, let dailyHumidity = daily.first?.humidity, var dailySunrise = daily.first?.sunrise, var dailySunset = daily.first?.sunset, let dailyWindSpeed = daily.first?.windSpeed else {return }
+                guard let daily = value.daily, let weather = daily.first?.weather, let icon = weather.first?.icon, let temp = daily.first?.temp, let maxTemp = temp.max, let dailyHumidity = daily.first?.humidity, let dailySunrise = daily.first?.sunrise, let dailySunset = daily.first?.sunset, let dailyWindSpeed = daily.first?.windSpeed else {return }
                 self.dailyTemp = maxTemp
                 self.dailyHumidity = dailyHumidity
-                self.dailySunrise = self.convertUnix(unixTime: &dailySunrise)
-                self.dailySunset = self.convertUnix(unixTime: &dailySunset)
+                self.dailySunrise = self.convertUnix(unixTime: dailySunrise)
+                self.dailySunset = self.convertUnix(unixTime: dailySunset)
                 self.dailyWindSpeed = dailyWindSpeed
                 if let url = URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png") {
                     do {
