@@ -11,24 +11,58 @@ import Alamofire
 class WeatherViewController: UIViewController {
     private var apiProvider: RestAPIProviderProtocol!
     
-    @IBOutlet weak var sunrise: UILabel!
-    @IBOutlet weak var sunset: UILabel!
-    @IBOutlet weak var temp: UILabel!
-    @IBOutlet weak var feelsLike: UILabel!
-    @IBOutlet weak var pressure: UILabel!
-    @IBOutlet weak var humidity: UILabel!
-    @IBOutlet weak var clouds: UILabel!
-    @IBOutlet weak var visibility: UILabel!
-    @IBOutlet weak var windSpeed: UILabel!
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var tableView: UITableView!
+    var sunrise: String!
+    var sunset: String!
+    var temp: Double!
+    var humidity: Int!
+    var windSpeed: Double!
+    var weatherImage: UIImage!
     
-    var latitude: Double!
-    var longitude: Double!
-//    var nameCity: String?
+    var dailySunrise: String!
+    var dailySunset: String!
+    var dailyTemp: Double!
+    var dailyHumidity: Int!
+    var dailyWindSpeed: Double!
+    var dailyWeatherImage: UIImage!
+    
+    var hourlyUvi: Double!
+    var hourlyPressure: Int!
+    var hourlyTemp: Double!
+    var hourlyHumidity: Int!
+    var hourlyWindSpeed: Double!
+    var hourlyWeatherImage: UIImage!
+    
+    struct Content {
+        var type: ContentType
+        var content: [String]
+    }
+    
+    enum ContentType: Int {
+        case current = 0
+        case daily
+        case hourly
+        
+        var description: String {
+            switch self {
+            case.current:
+                return "Current weather"
+            case.daily:
+                return "Daily weather"
+            case.hourly:
+                return "Hourly weather"
+            }
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-            apiProvider = AlamofireProvaider()
-            getCoordinatesByName()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UINib(nibName: "WeatherCell", bundle: nil), forCellReuseIdentifier: WeatherCell.key)
+        apiProvider = AlamofireProvaider()
+        getCoordinatesByName()
     }
     
     fileprivate func getCoordinatesByName() {
