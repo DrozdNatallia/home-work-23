@@ -47,15 +47,21 @@ class WeatherViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        nameCity = "London"
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UINib(nibName: "WeatherCell", bundle: nil), forCellReuseIdentifier: WeatherCell.key)
+        tableView.register(UINib(nibName: "CurrentWeatherCell", bundle: nil), forCellReuseIdentifier: CurrentWeatherCell.key)
+        tableView.register(UINib(nibName: "HourlyWeatherCell", bundle: nil), forCellReuseIdentifier: HourlyWeatherCell.key)
+        tableView.register(UINib(nibName: "DailyWeatherCell", bundle: nil), forCellReuseIdentifier: DailyWeatherCell.key)
+        
+        
         apiProvider = AlamofireProvaider()
         getCoordinatesByName()
     }
     
     fileprivate func getCoordinatesByName() {
-        apiProvider.getCoordinatesByName(name: "London") { [weak self] result in
+        guard let nameCity = nameCity else {return}
+        apiProvider.getCoordinatesByName(name: nameCity) { [weak self] result in
             guard let self = self else {return}
             switch result {
             case .success(let value):
