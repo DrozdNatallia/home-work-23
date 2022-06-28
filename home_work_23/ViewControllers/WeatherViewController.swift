@@ -68,11 +68,14 @@ class WeatherViewController: UIViewController {
         }
     }
     
-    func convertUnix(unixTime: Int) -> String {
+    func convertUnix(unixTime: Int, isDate: Bool) -> String {
         let newDate = Date(timeIntervalSince1970: TimeInterval(unixTime))
         let formatted = DateFormatter()
-        formatted.dateStyle = .none
-        formatted.timeStyle = .medium
+        if isDate {
+            formatted.dateFormat = "EEE"
+        } else {
+            formatted.dateFormat = "hh"
+        }
         let formattedTime = formatted.string(from: newDate)
         return formattedTime
     }
