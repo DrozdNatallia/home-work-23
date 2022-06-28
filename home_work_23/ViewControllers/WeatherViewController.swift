@@ -10,47 +10,36 @@ import Alamofire
 
 class WeatherViewController: UIViewController {
     private var apiProvider: RestAPIProviderProtocol!
-    
+    var nameCity: String!
     @IBOutlet weak var tableView: UITableView!
-    var sunrise: String!
-    var sunset: String!
+    
+    var currentClouds: String!
     var temp: Double!
-    var humidity: Int!
-    var windSpeed: Double!
     var weatherImage: UIImage!
     
-    var dailySunrise: String!
-    var dailySunset: String!
-    var dailyTemp: Double!
-    var dailyHumidity: Int!
-    var dailyWindSpeed: Double!
-    var dailyWeatherImage: UIImage!
+    var dailyMaxTempArray: [Double] = []
+    var dailyArrayDt: [String] = []
+    var dailyArrayMinTemp: [Double] = []
+    var dailyImageArray: [UIImage] = []
     
-    var hourlyUvi: Double!
-    var hourlyPressure: Int!
-    var hourlyTemp: Double!
-    var hourlyHumidity: Int!
-    var hourlyWindSpeed: Double!
-    var hourlyWeatherImage: UIImage!
-    
-    struct Content {
-        var type: ContentType
-        var content: [String]
-    }
-    
+    var hourlyArrayTemp: [Double] = []
+    var hourlyArrayDt: [String] = []
+    var hourlyArrayImage: [UIImage] = []
+
     enum ContentType: Int {
         case current = 0
-        case daily
         case hourly
+        case daily
+  
         
         var description: String {
             switch self {
             case.current:
                 return "Current weather"
+            case.hourly:
+                return "Houly weather"
             case.daily:
                 return "Daily weather"
-            case.hourly:
-                return "Hourly weather"
             }
         }
     }
@@ -93,51 +82,44 @@ class WeatherViewController: UIViewController {
             guard let self = self else {return}
             switch result {
             case .success(let value):
-                guard let current = value.current, let weather = current.weather, let icon = weather.first?.icon, let temp = current.temp, let sunrise = current.sunrise, let sunset = current.sunset, let windSpeed = current.windSpeed, let humidity = current.humidity else {return}
+                guard let current = value.current, let weather = current.weather, let temp = current.temp, let clouds = weather.first?.description else {return}
                 self.temp = temp
-                self.sunrise = self.convertUnix(unixTime: sunrise)
-                self.sunset = self.convertUnix(unixTime: sunset)
-                self.windSpeed = windSpeed
-                self.humidity = humidity
-                if let url = URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png") {
-                    do {
-                        let data = try Data(contentsOf: url)
-                        self.weatherImage = UIImage(data: data)
-                    } catch _ {
-                        print("error")
-                    }
-                }
+                self.currentClouds = clouds
                 
                 // MARK: Hourly
-                guard let hourly = value.daily, let weather = hourly.first?.weather, let icon = weather.first?.icon, let hourlyHumidity = hourly.first?.humidity, let hourlyMaxTemp = hourly.first?.temp?.max, let hourlyPressure = hourly.first?.pressure, let hourlyUvi = hourly.first?.uvi, let hourlyWindSpeed = hourly.first?.windSpeed else {return }
-                self.hourlyTemp = hourlyMaxTemp
-                self.hourlyHumidity = hourlyHumidity
-                self.hourlyPressure = hourlyPressure
-                self.hourlyUvi = hourlyUvi
-                self.hourlyWindSpeed = hourlyWindSpeed
-                if let url = URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png") {
-                    do {
-                        let data = try Data(contentsOf: url)
-                        self.hourlyWeatherImage = UIImage(data: data)
-                    } catch _ {
-                        print("error")
+                guard let hourly = value.hourly else {return }
+                for item in hourly {
+                    guard let hourlyTemp = item.temp, let hourlyDt = item.dt, let weather = item.weather, let icon = weather.first?.icon else {return}
+                    if let url = URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png") {
+                        do {
+                            let data = try Data(contentsOf: url)
+                            self.hourlyArrayImage.append(UIImage(data: data)!)
+                        } catch _ {
+                            print("error")
+                        }
                     }
+                    self.hourlyArrayDt.append(self.convertUnix(unixTime: hourlyDt, isDate: false))
+                    self.hourlyArrayTemp.append(hourlyTemp)
                 }
                 
                 // MARK: DAILY
-                guard let daily = value.daily, let weather = daily.first?.weather, let icon = weather.first?.icon, let temp = daily.first?.temp, let maxTemp = temp.max, let dailyHumidity = daily.first?.humidity, let dailySunrise = daily.first?.sunrise, let dailySunset = daily.first?.sunset, let dailyWindSpeed = daily.first?.windSpeed else {return }
-                self.dailyTemp = maxTemp
-                self.dailyHumidity = dailyHumidity
-                self.dailySunrise = self.convertUnix(unixTime: dailySunrise)
-                self.dailySunset = self.convertUnix(unixTime: dailySunset)
-                self.dailyWindSpeed = dailyWindSpeed
-                if let url = URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png") {
-                    do {
-                        let data = try Data(contentsOf: url)
-                        self.dailyWeatherImage = UIImage(data: data)
-                    } catch _ {
-                        print("error")
+                guard let daily = value.daily else {return }
+                
+                for item in daily {
+                    guard let temp = item.temp, let maxTemp = temp.max, let minTemp = temp.min, let days = item.dt, let weather = item.weather, let icon = weather.first?.icon else {return}
+                    
+                    if let url = URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png") {
+                        do {
+                            let data = try Data(contentsOf: url)
+                            self.dailyImageArray.append(UIImage(data: data)!)
+                        } catch _ {
+                            print("error")
+                        }
                     }
+                    self.dailyMaxTempArray.append(maxTemp)
+                    self.dailyArrayMinTemp.append(minTemp)
+                    self.dailyArrayDt.append(self.convertUnix(unixTime: days, isDate: true))
+                    
                 }
                 self.tableView.reloadData()
             case .failure(let error):
