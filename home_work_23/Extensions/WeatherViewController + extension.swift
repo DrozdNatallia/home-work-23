@@ -13,41 +13,44 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
         3
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        let key = ContentType(rawValue: section)
+        switch key {
+        case .daily:
+            return dailyArrayDt.count
+        default:
+            return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let key = ContentType(rawValue: indexPath.section)
-        if let cell = tableView.dequeueReusableCell(withIdentifier: WeatherCell.key) as? WeatherCell {
-            switch key {
-            case .current:
-                guard let temp = temp, let sunset = sunset, let sunrise = sunrise, let humidity = humidity, let windSpeed = windSpeed, let image = weatherImage else {return cell}
-                cell.windSpeed.text = "Wind speed: \(windSpeed) m/s"
-                cell.sunset.text = "Sunset: \(sunset)"
-                cell.sunrise.text = "Sunrise: \(sunrise)"
-                cell.humidity.text = "Humidity: \(humidity) %"
-                cell.temp.text = "Temp: \(temp) °"
-                cell.weatherImageView.image = image
-                
-            case.daily:
-                guard let temp = dailyTemp, let sunset = dailySunset, let sunrise = dailySunrise, let humidity = dailyHumidity, let windSpeed = dailyWindSpeed, let image = dailyWeatherImage else {return cell}
-                cell.windSpeed.text = "Wind speed: \(windSpeed) m/s"
-                cell.sunset.text = "Sunset: \(sunset)"
-                cell.sunrise.text = "Sunrise: \(sunrise)"
-                cell.humidity.text = "Humidity: \(humidity) %"
-                cell.temp.text = "Temp: \(temp) °"
-                cell.weatherImageView.image = image
-            default:
-                guard let hourlyHumidity = hourlyHumidity, let hourlyMaxTemp = hourlyTemp, let hourlyUvi = hourlyUvi, let hourlyPressure = hourlyPressure, let hourlyWindSpeed = hourlyWindSpeed, let image = hourlyWeatherImage else { return cell}
-                cell.windSpeed.text = "Wind speed: \(hourlyWindSpeed) m/s"
-                cell.sunset.text = "Pressure: \(hourlyPressure)"
-                cell.sunrise.text = "Uvi: \(hourlyUvi)"
-                cell.humidity.text = "Humidity: \(hourlyHumidity) %"
-                cell.temp.text = "Temp: \(hourlyMaxTemp) °"
-                cell.weatherImageView.image = image
-                
+        switch key {
+        case .current:
+            if let cell = tableView.dequeueReusableCell(withIdentifier: CurrentWeatherCell.key) as? CurrentWeatherCell {
+                guard let nameCity = nameCity, let temp = temp, let clouds = currentClouds, let maxTemp = dailyMaxTempArray.max(), let minTemp = dailyMaxTempArray.min() else {return cell}
+                    cell.nameCity.text = nameCity
+                    cell.currentTemp.text = "\(temp)°"
+                    cell.currentClouds.text = clouds
+                cell.currentMaxMinTemp.text = "Min: \(minTemp)°, Max: \(maxTemp)°"
+                return cell
             }
-            return cell
+        case .hourly:
+            
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "HourlyWeatherCell", for: indexPath) as? HourlyWeatherCell {
+                cell.tempArray = hourlyArrayTemp
+                cell.dtArray = hourlyArrayDt
+                cell.imageArray = hourlyArrayImage
+                cell.collectionView.reloadData()
+               return cell
+            }
+        default:
+            if let cell = tableView.dequeueReusableCell(withIdentifier: DailyWeatherCell.key) as? DailyWeatherCell {
+                cell.days.text = "\(dailyArrayDt[indexPath.row])"
+                cell.minTemp.text = "Min: \(dailyArrayMinTemp[indexPath.row])°"
+                cell.maxTemp.text = "Max: \(dailyMaxTempArray[indexPath.row])°"
+                cell.icon.image = dailyImageArray[indexPath.row]
+                return cell
+            }
         }
         return UITableViewCell()
     }
@@ -65,8 +68,6 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
             return ""
         }
     }
-    
-    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         30
     }
