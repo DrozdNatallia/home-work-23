@@ -7,6 +7,7 @@
 
 import UIKit
 import Alamofire
+import RealmSwift
 
 class WeatherViewController: UIViewController {
     private var apiProvider: RestAPIProviderProtocol!
@@ -30,20 +31,17 @@ class WeatherViewController: UIViewController {
         case current = 0
         case hourly
         case daily
-  
-        
         var description: String {
             switch self {
-            case.current:
+            case .current:
                 return "Current weather"
-            case.hourly:
+            case .hourly:
                 return "Houly weather"
-            case.daily:
+            case .daily:
                 return "Daily weather"
             }
         }
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,27 +72,17 @@ class WeatherViewController: UIViewController {
         }
     }
     
-    func convertUnix(unixTime: Int, isDate: Bool) -> String {
-        let newDate = Date(timeIntervalSince1970: TimeInterval(unixTime))
-        let formatted = DateFormatter()
-        if isDate {
-            formatted.dateFormat = "EEE"
-        } else {
-            formatted.dateFormat = "hh"
-        }
-        let formattedTime = formatted.string(from: newDate)
-        return formattedTime
-    }
-    
     private func getWeatherByCoordinates(city: InfoCity) {
         apiProvider.getWeatherForCityCoordinates(lat: city.lat, lon: city.lon) { [weak self] result in
             guard let self = self else {return}
             switch result {
             case .success(let value):
-                guard let current = value.current, let weather = current.weather, let temp = current.temp, let clouds = weather.first?.description else {return}
+                guard let current = value.current, let weather = current.weather, let temp = current.temp, let clouds = weather.first?.description, let lat = value.lat, let lon = value.lon else {return}
                 self.temp = temp
                 self.currentClouds = clouds
-                
+                let date = Int(Date().timeIntervalSince1970)
+                self.setCurrentWeatherQueryList(temp: temp, weather: clouds, time: date)
+                self.setQueryList(lat: lat, lon: lon, time: date)
                 // MARK: Hourly
                 guard let hourly = value.hourly else {return }
                 for item in hourly {
@@ -107,7 +95,7 @@ class WeatherViewController: UIViewController {
                             print("error")
                         }
                     }
-                    self.hourlyArrayDt.append(self.convertUnix(unixTime: hourlyDt, isDate: false))
+                    self.hourlyArrayDt.append(self.convertUnix(unixTime: hourlyDt, formattedType: .hour))
                     self.hourlyArrayTemp.append(hourlyTemp)
                 }
                 
@@ -127,7 +115,7 @@ class WeatherViewController: UIViewController {
                     }
                     self.dailyMaxTempArray.append(maxTemp)
                     self.dailyArrayMinTemp.append(minTemp)
-                    self.dailyArrayDt.append(self.convertUnix(unixTime: days, isDate: true))
+                    self.dailyArrayDt.append(self.convertUnix(unixTime: days, formattedType: .day))
                     
                 }
                 self.tableView.reloadData()
