@@ -11,4 +11,5 @@ import RealmSwift
 
 protocol RealmProviderProtocol {
     func getResult<T: RealmFetchable>(nameObject: T.Type) -> Results<T>
+    func writeObjectToDatabase(name: Object) -> Void
 }

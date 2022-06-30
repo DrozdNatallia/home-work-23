@@ -13,16 +13,13 @@ import RealmSwift
 extension UIViewController {
     
         func setQueryList(lat: Double, lon: Double, time: Int) {
-            let realm = try! Realm()
             let newRequest = RealmQueryList()
+            let provaider = RealmProvader()
             newRequest.latitude = lat
             newRequest.longitude = lon
             newRequest.time = time
-            newRequest.currentWeather = realm.objects(RealmCurrentWeather.self).last
-             try! realm.write {
-                 realm.add(newRequest)
-             }
-            print(realm.configuration.fileURL)
+            newRequest.currentWeather = provaider.getResult(nameObject: RealmCurrentWeather.self).last
+            provaider.writeObjectToDatabase(name: newRequest)
         }
     
     func setCurrentWeatherQueryList(temp: Double, weather: String, time: Int){
@@ -30,10 +27,6 @@ extension UIViewController {
         newRequest.temp = temp
         newRequest.weatherDescription = weather
         newRequest.time = time
-        let realm = try! Realm()
-        try! realm.write {
-            realm.add(newRequest)
-        }
-        
+        RealmProvader().writeObjectToDatabase(name: newRequest)
     }
 }

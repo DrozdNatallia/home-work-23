@@ -10,6 +10,13 @@ import RealmSwift
 import UIKit
 
 class RealmProvader: RealmProviderProtocol {
+    func writeObjectToDatabase(name: Object) {
+        let realm = try! Realm()
+        try! realm.write {
+            realm.add(name)
+        }
+    }
+    
     func getResult<T: RealmFetchable>(nameObject: T.Type) -> Results<T> {
         let realm = try! Realm()
         let res = realm.objects(nameObject.self)
