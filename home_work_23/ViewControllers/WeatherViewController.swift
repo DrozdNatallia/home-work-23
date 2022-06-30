@@ -95,7 +95,7 @@ class WeatherViewController: UIViewController {
                             print("error")
                         }
                     }
-                    self.hourlyArrayDt.append(self.convertUnix(unixTime: hourlyDt, formattedType: .hour))
+                    self.hourlyArrayDt.append(hourlyDt.convertUnix(formattedType: .hour))
                     self.hourlyArrayTemp.append(hourlyTemp)
                 }
                 
@@ -115,7 +115,7 @@ class WeatherViewController: UIViewController {
                     }
                     self.dailyMaxTempArray.append(maxTemp)
                     self.dailyArrayMinTemp.append(minTemp)
-                    self.dailyArrayDt.append(self.convertUnix(unixTime: days, formattedType: .day))
+                    self.dailyArrayDt.append(days.convertUnix(formattedType: .day))
                     
                 }
                 self.tableView.reloadData()

@@ -12,33 +12,16 @@ import RealmSwift
 
 extension UIViewController {
     
-    func convertUnix(unixTime: Int, formattedType: FormattedType) -> String {
-        let newDate = Date(timeIntervalSince1970: TimeInterval(unixTime))
-        let formatted = DateFormatter()
-        switch formattedType {
-        case .day:
-            formatted.dateFormat = "EEE"
-        case .hour:
-            formatted.dateFormat = "hh"
-        case .fullTime:
-            formatted.dateFormat = "dd-MM-yy HH:mm:ss"
-        }
-        let formattedTime = formatted.string(from: newDate)
-        return formattedTime
-    }
-    
         func setQueryList(lat: Double, lon: Double, time: Int) {
             let realm = try! Realm()
             let newRequest = RealmQueryList()
             newRequest.latitude = lat
             newRequest.longitude = lon
             newRequest.time = time
-            let o = realm.objects(RealmCurrentWeather.self).last
-            newRequest.currentWeather = o
+            newRequest.currentWeather = realm.objects(RealmCurrentWeather.self).last
              try! realm.write {
                  realm.add(newRequest)
              }
-            
             print(realm.configuration.fileURL)
         }
     
@@ -54,4 +37,3 @@ extension UIViewController {
         
     }
 }
-

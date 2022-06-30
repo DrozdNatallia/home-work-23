@@ -25,7 +25,7 @@ extension RealmListController: UITableViewDelegate, UITableViewDataSource {
             guard let currentWeather = info.currentWeather else {return cell}
             cell.longitude.text = info.longitude.description
             cell.latitude.text = info.latitude.description
-            cell.time.text = convertUnix(unixTime: info.time, formattedType: .fullTime)
+            cell.time.text = info.time.convertUnix(formattedType: .fullTime)
             cell.temp.text = currentWeather.temp.description
             cell.weatherDescription.text = currentWeather.weatherDescription
             return cell

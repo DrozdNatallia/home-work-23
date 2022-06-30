@@ -32,13 +32,16 @@
 		CCA8EC5E286B02B4008DCF9E /* CurrentWeatherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCA8EC5C286B02B4008DCF9E /* CurrentWeatherCell.xib */; };
 		CCC3107E286C49C200A3B49C /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = CCC3107D286C49C200A3B49C /* Realm */; };
 		CCC31080286C49C200A3B49C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CCC3107F286C49C200A3B49C /* RealmSwift */; };
-		CCC31087286C5D7F00A3B49C /* RealmQueryLis.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC31086286C5D7F00A3B49C /* RealmQueryLis.swift */; };
+		CCC31087286C5D7F00A3B49C /* RealmQueryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC31086286C5D7F00A3B49C /* RealmQueryList.swift */; };
 		CCCEA62F286B13B600E5CB0C /* HourlyWeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCEA62D286B13B600E5CB0C /* HourlyWeatherCell.swift */; };
 		CCCEA630286B13B600E5CB0C /* HourlyWeatherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCCEA62E286B13B600E5CB0C /* HourlyWeatherCell.xib */; };
 		CCCEA633286B154B00E5CB0C /* HourlyWeatherCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCEA631286B154B00E5CB0C /* HourlyWeatherCollectionCell.swift */; };
 		CCCEA634286B154B00E5CB0C /* HourlyWeatherCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCCEA632286B154B00E5CB0C /* HourlyWeatherCollectionCell.xib */; };
 		CCCEA637286B428C00E5CB0C /* DailyWeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCEA635286B428C00E5CB0C /* DailyWeatherCell.swift */; };
 		CCCEA638286B428C00E5CB0C /* DailyWeatherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCCEA636286B428C00E5CB0C /* DailyWeatherCell.xib */; };
+		CCD72145286DB6160043B636 /* RealmProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD72144286DB6150043B636 /* RealmProviderProtocol.swift */; };
+		CCD72147286DB63B0043B636 /* RealmProvaider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD72146286DB63B0043B636 /* RealmProvaider.swift */; };
+		CCD72149286DC2D10043B636 /* Int + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD72148286DC2D10043B636 /* Int + extension.swift */; };
 		CCDD00D9286CFDEA00CE8582 /* FormattedType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDD00D8286CFDEA00CE8582 /* FormattedType.swift */; };
 		CCDD00DB286D00B700CE8582 /* UiViewController + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDD00DA286D00B700CE8582 /* UiViewController + extension.swift */; };
 		CCDD00DD286D01C200CE8582 /* RealmListController + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDD00DC286D01C200CE8582 /* RealmListController + extension.swift */; };
@@ -73,13 +76,16 @@
 		CC8A47592867557000C427B3 /* RestAPIProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestAPIProviderProtocol.swift; sourceTree = "<group>"; };
 		CCA8EC5B286B02B4008DCF9E /* CurrentWeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherCell.swift; sourceTree = "<group>"; };
 		CCA8EC5C286B02B4008DCF9E /* CurrentWeatherCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrentWeatherCell.xib; sourceTree = "<group>"; };
-		CCC31086286C5D7F00A3B49C /* RealmQueryLis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmQueryLis.swift; sourceTree = "<group>"; };
+		CCC31086286C5D7F00A3B49C /* RealmQueryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmQueryList.swift; sourceTree = "<group>"; };
 		CCCEA62D286B13B600E5CB0C /* HourlyWeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeatherCell.swift; sourceTree = "<group>"; };
 		CCCEA62E286B13B600E5CB0C /* HourlyWeatherCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HourlyWeatherCell.xib; sourceTree = "<group>"; };
 		CCCEA631286B154B00E5CB0C /* HourlyWeatherCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeatherCollectionCell.swift; sourceTree = "<group>"; };
 		CCCEA632286B154B00E5CB0C /* HourlyWeatherCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HourlyWeatherCollectionCell.xib; sourceTree = "<group>"; };
 		CCCEA635286B428C00E5CB0C /* DailyWeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherCell.swift; sourceTree = "<group>"; };
 		CCCEA636286B428C00E5CB0C /* DailyWeatherCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DailyWeatherCell.xib; sourceTree = "<group>"; };
+		CCD72144286DB6150043B636 /* RealmProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmProviderProtocol.swift; sourceTree = "<group>"; };
+		CCD72146286DB63B0043B636 /* RealmProvaider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmProvaider.swift; sourceTree = "<group>"; };
+		CCD72148286DC2D10043B636 /* Int + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int + extension.swift"; sourceTree = "<group>"; };
 		CCDD00D8286CFDEA00CE8582 /* FormattedType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattedType.swift; sourceTree = "<group>"; };
 		CCDD00DA286D00B700CE8582 /* UiViewController + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UiViewController + extension.swift"; sourceTree = "<group>"; };
 		CCDD00DC286D01C200CE8582 /* RealmListController + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RealmListController + extension.swift"; sourceTree = "<group>"; };
@@ -149,6 +155,7 @@
 				CC471715286875D200122832 /* MapViewControllers + extension.swift */,
 				CC0F05CB2868815200A33DE0 /* WeatherViewController + extension.swift */,
 				CCDD00DA286D00B700CE8582 /* UiViewController + extension.swift */,
+				CCD72148286DC2D10043B636 /* Int + extension.swift */,
 				CCDD00DC286D01C200CE8582 /* RealmListController + extension.swift */,
 				CCDD00DE286D021200CE8582 /* HourlyWeatherCell + extension.swift */,
 			);
@@ -207,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				CC8A47592867557000C427B3 /* RestAPIProviderProtocol.swift */,
+				CCD72144286DB6150043B636 /* RealmProviderProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -215,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				CC8A475728672B1000C427B3 /* AlamofireProvaider.swift */,
+				CCD72146286DB63B0043B636 /* RealmProvaider.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -268,7 +277,7 @@
 		CCDD00E3286D050E00CE8582 /* RealmModels */ = {
 			isa = PBXGroup;
 			children = (
-				CCC31086286C5D7F00A3B49C /* RealmQueryLis.swift */,
+				CCC31086286C5D7F00A3B49C /* RealmQueryList.swift */,
 				CCDD00E1286D03A100CE8582 /* RealmCurrentWeather.swift */,
 			);
 			path = RealmModels;
@@ -403,6 +412,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCD72145286DB6160043B636 /* RealmProviderProtocol.swift in Sources */,
 				CC5BEC5428675E1700A0237C /* MapViewController.swift in Sources */,
 				CCDD00DF286D021200CE8582 /* HourlyWeatherCell + extension.swift in Sources */,
 				CCCEA633286B154B00E5CB0C /* HourlyWeatherCollectionCell.swift in Sources */,
@@ -419,12 +429,14 @@
 				CCCEA637286B428C00E5CB0C /* DailyWeatherCell.swift in Sources */,
 				CCDD00E2286D03A100CE8582 /* RealmCurrentWeather.swift in Sources */,
 				CC471716286875D200122832 /* MapViewControllers + extension.swift in Sources */,
-				CCC31087286C5D7F00A3B49C /* RealmQueryLis.swift in Sources */,
+				CCC31087286C5D7F00A3B49C /* RealmQueryList.swift in Sources */,
 				CC8A475828672B1000C427B3 /* AlamofireProvaider.swift in Sources */,
+				CCD72149286DC2D10043B636 /* Int + extension.swift in Sources */,
 				CCA8EC5D286B02B4008DCF9E /* CurrentWeatherCell.swift in Sources */,
 				CC8A47542867252100C427B3 /* DailyWeatherData.swift in Sources */,
 				CC8A47522867250200C427B3 /* HourlyWeatherData.swift in Sources */,
 				CC3064F0286CD24C00F66636 /* RealmListController.swift in Sources */,
+				CCD72147286DB63B0043B636 /* RealmProvaider.swift in Sources */,
 				CCDD00DD286D01C200CE8582 /* RealmListController + extension.swift in Sources */,
 				CC8A47562867286400C427B3 /* Constants.swift in Sources */,
 				CCDD00D9286CFDEA00CE8582 /* FormattedType.swift in Sources */,
