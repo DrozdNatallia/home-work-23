@@ -12,16 +12,12 @@ import RealmSwift
 
 extension RealmListController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let realm = try! Realm()
-        let res = realm.objects(RealmQueryList.self)
-        return res.count
+        return provaiderRealm.getResult(nameObject: RealmQueryList.self).count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: ListRequestTableCell.key) as? ListRequestTableCell {
-            let realm = try! Realm()
-            let res = realm.objects(RealmQueryList.self)
-            let info = res[indexPath.row]
+            let info = provaiderRealm.getResult(nameObject: RealmQueryList.self)[indexPath.row]
             guard let currentWeather = info.currentWeather else {return cell}
             cell.longitude.text = info.longitude.description
             cell.latitude.text = info.latitude.description
