@@ -11,8 +11,10 @@ import CoreLocation
 
 class MapViewController: UIViewController {
     private var apiProvider: RestAPIProviderProtocol!
+    private var provaider: RealmProviderProtocol!
     override func viewDidLoad() {
         super.viewDidLoad()
+        provaider = RealmProvader()
         apiProvider = AlamofireProvaider()
         
         let camera = GMSCameraPosition.camera(
@@ -30,7 +32,10 @@ class MapViewController: UIViewController {
             guard let self = self else {return}
             switch result {
             case .success(let value):
-                guard let current = value.current, let temp = current.temp else {return}
+                guard let current = value.current, let temp = current.temp, let lat = value.lat, let lon = value.lon, let weather = current.weather, let weatherDescription = weather.first?.description else {return}
+                let data = Int(Date().timeIntervalSince1970)
+                self.provaider.setCurrentWeatherQueryList(temp: temp, weather: weatherDescription, time: data)
+                self.provaider.setQueryList(lat: lat, lon: lon, time: data)
                 let alert = UIAlertController(title: "Температура:", message: temp.description, preferredStyle: .alert)
                 let okButton = UIAlertAction(title: "OK", style: .cancel)
                 alert.addAction(okButton)
