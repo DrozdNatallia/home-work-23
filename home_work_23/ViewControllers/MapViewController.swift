@@ -11,7 +11,7 @@ import CoreLocation
 
 class MapViewController: UIViewController {
     private var apiProvider: RestAPIProviderProtocol!
-    private var provaider: RealmProvader!
+    private var provaider: RealmProviderProtocol!
     override func viewDidLoad() {
         super.viewDidLoad()
         provaider = RealmProvader()

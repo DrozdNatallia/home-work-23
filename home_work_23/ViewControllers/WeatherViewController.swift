@@ -11,7 +11,7 @@ import RealmSwift
 
 class WeatherViewController: UIViewController {
     private var apiProvider: RestAPIProviderProtocol!
-    private var provaider: RealmProvader!
+    private var provaider: RealmProviderProtocol!
     var nameCity: String!
     @IBOutlet weak var tableView: UITableView!
     

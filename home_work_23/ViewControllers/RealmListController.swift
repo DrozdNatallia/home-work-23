@@ -10,7 +10,7 @@ import RealmSwift
 
 class RealmListController: UIViewController {
     @IBOutlet weak var tableViewRequest: UITableView!
-    var provaider: RealmProvader!
+    var provaider: RealmProviderProtocol!
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewRequest.delegate = self
