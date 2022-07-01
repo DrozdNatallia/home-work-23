@@ -11,6 +11,7 @@ import RealmSwift
 
 class WeatherViewController: UIViewController {
     private var apiProvider: RestAPIProviderProtocol!
+    private var provaider: RealmProvader!
     var nameCity: String!
     @IBOutlet weak var tableView: UITableView!
     
@@ -52,7 +53,7 @@ class WeatherViewController: UIViewController {
         tableView.register(UINib(nibName: "HourlyWeatherCell", bundle: nil), forCellReuseIdentifier: HourlyWeatherCell.key)
         tableView.register(UINib(nibName: "DailyWeatherCell", bundle: nil), forCellReuseIdentifier: DailyWeatherCell.key)
         
-        
+        provaider = RealmProvader()
         apiProvider = AlamofireProvaider()
         getCoordinatesByName()
     }
@@ -81,8 +82,8 @@ class WeatherViewController: UIViewController {
                 self.temp = temp
                 self.currentClouds = clouds
                 let date = Int(Date().timeIntervalSince1970)
-                self.setCurrentWeatherQueryList(temp: temp, weather: clouds, time: date)
-                self.setQueryList(lat: lat, lon: lon, time: date)
+                self.provaider.setCurrentWeatherQueryList(temp: temp, weather: clouds, time: date)
+                self.provaider.setQueryList(lat: lat, lon: lon, time: date)
                 // MARK: Hourly
                 guard let hourly = value.hourly else {return }
                 for item in hourly {

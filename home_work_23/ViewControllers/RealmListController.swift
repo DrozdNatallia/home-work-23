@@ -10,16 +10,14 @@ import RealmSwift
 
 class RealmListController: UIViewController {
     @IBOutlet weak var tableViewRequest: UITableView!
-    var provaiderRealm: RealmProviderProtocol!
+    var provaider: RealmProvader!
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewRequest.delegate = self
         tableViewRequest.dataSource = self
-        
         tableViewRequest.register(UINib(nibName: "ListRequestTableCell", bundle: nil), forCellReuseIdentifier: ListRequestTableCell.key)
-        provaiderRealm = RealmProvader()
+        provaider = RealmProvader()
     }
-
     override func viewWillAppear(_ animated: Bool) {
         tableViewRequest.reloadData()
     }

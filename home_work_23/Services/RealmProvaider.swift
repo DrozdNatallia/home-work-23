@@ -10,16 +10,31 @@ import RealmSwift
 import UIKit
 
 class RealmProvader: RealmProviderProtocol {
+    private let realm = try! Realm()
+    
     func writeObjectToDatabase(name: Object) {
-        let realm = try! Realm()
         try! realm.write {
             realm.add(name)
         }
     }
-    
     func getResult<T: RealmFetchable>(nameObject: T.Type) -> Results<T> {
-        let realm = try! Realm()
-        let res = realm.objects(nameObject.self)
-        return res   
+        realm.objects(nameObject.self)
+    }
+    
+    func setQueryList(lat: Double, lon: Double, time: Int) {
+        let newRequest = RealmQueryList()
+        newRequest.latitude = lat
+        newRequest.longitude = lon
+        newRequest.time = time
+        newRequest.currentWeather = getResult(nameObject: RealmCurrentWeather.self).last
+        writeObjectToDatabase(name: newRequest)
+    }
+    
+    func setCurrentWeatherQueryList(temp: Double, weather: String, time: Int){
+        let newRequest = RealmCurrentWeather()
+        newRequest.temp = temp
+        newRequest.weatherDescription = weather
+        newRequest.time = time
+        writeObjectToDatabase(name: newRequest)
     }
 }
