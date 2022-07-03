@@ -11,6 +11,7 @@ enum FormattedType {
     case day
     case hour
     case fullTime
+    case minutly
     
     var description: String {
         switch self {
@@ -20,6 +21,8 @@ enum FormattedType {
              return "hh"
          case .fullTime:
              return "dd-MM-yy HH:mm:ss"
+        case .minutly:
+            return "mm"
          }
     }
 }

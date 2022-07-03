@@ -27,7 +27,8 @@ class WeatherViewController: UIViewController {
     var hourlyArrayTemp: [Double] = []
     var hourlyArrayDt: [String] = []
     var hourlyArrayImage: [UIImage] = []
-
+    var hourlyArrayBadWeatherDt: [Int] = []
+    
     enum ContentType: Int {
         case current = 0
         case hourly
@@ -43,16 +44,17 @@ class WeatherViewController: UIViewController {
             }
         }
     }
-    
+    let notificationCenter = UNUserNotificationCenter.current()
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameCity = "London"
+        nameCity = "Moskow"
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "CurrentWeatherCell", bundle: nil), forCellReuseIdentifier: CurrentWeatherCell.key)
         tableView.register(UINib(nibName: "HourlyWeatherCell", bundle: nil), forCellReuseIdentifier: HourlyWeatherCell.key)
         tableView.register(UINib(nibName: "DailyWeatherCell", bundle: nil), forCellReuseIdentifier: DailyWeatherCell.key)
         
+        notificationCenter.removeAllPendingNotificationRequests()
         provaider = RealmProvader()
         apiProvider = AlamofireProvaider()
         getCoordinatesByName()
@@ -73,6 +75,29 @@ class WeatherViewController: UIViewController {
         }
     }
     
+    private func setWeatherNotifications(arrayTime: [Int]) {
+        for item in arrayTime {
+            notificationCenter.requestAuthorization(options: [.alert, .badge, .sound]) { isAutorized, error in
+                if isAutorized {
+                    let content = UNMutableNotificationContent()
+                    content.body = "Weather conditions will worsen soon"
+                    // content.badge = 1
+                    var date = DateComponents()
+                    date.hour = Int(item.convertUnix(formattedType: .hour))
+                    date.minute = Int(item.convertUnix(formattedType: .minutly))
+                    let calendarTrigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: false)
+                    let indentifier = String(item)
+                    let request = UNNotificationRequest(identifier: indentifier, content: content, trigger: calendarTrigger)
+                    self.notificationCenter.add(request) { error in
+                        if let error = error {
+                            print (error)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     private func getWeatherByCoordinates(city: InfoCity) {
         apiProvider.getWeatherForCityCoordinates(lat: city.lat, lon: city.lon) { [weak self] result in
             guard let self = self else {return}
@@ -87,7 +112,7 @@ class WeatherViewController: UIViewController {
                 // MARK: Hourly
                 guard let hourly = value.hourly else {return }
                 for item in hourly {
-                    guard let hourlyTemp = item.temp, let hourlyDt = item.dt, let weather = item.weather, let icon = weather.first?.icon else {return}
+                    guard let hourlyTemp = item.temp, let hourlyDt = item.dt, let weather = item.weather, let icon = weather.first?.icon, let weatherId = weather.first?.id else {return}
                     if let url = URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png") {
                         do {
                             let data = try Data(contentsOf: url)
@@ -98,8 +123,11 @@ class WeatherViewController: UIViewController {
                     }
                     self.hourlyArrayDt.append(hourlyDt.convertUnix(formattedType: .hour))
                     self.hourlyArrayTemp.append(hourlyTemp)
+                    if weatherId < 800 {
+                        self.hourlyArrayBadWeatherDt.append(hourlyDt - 60 * 30)
+                    }
                 }
-                
+                self.setWeatherNotifications(arrayTime: self.hourlyArrayBadWeatherDt)
                 // MARK: DAILY
                 guard let daily = value.daily else {return }
                 
@@ -127,4 +155,4 @@ class WeatherViewController: UIViewController {
         }
     }
 }
-        
+
