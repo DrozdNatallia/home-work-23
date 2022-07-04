@@ -77,22 +77,17 @@ class WeatherViewController: UIViewController {
     
     private func setWeatherNotifications(arrayTime: [Int]) {
         for item in arrayTime {
-            notificationCenter.requestAuthorization(options: [.alert, .badge, .sound]) { isAutorized, error in
-                if isAutorized {
-                    let content = UNMutableNotificationContent()
-                    content.body = "Weather conditions will worsen soon"
-                    // content.badge = 1
-                    var date = DateComponents()
-                    date.hour = Int(item.convertUnix(formattedType: .hour))
-                    date.minute = Int(item.convertUnix(formattedType: .minutly))
-                    let calendarTrigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: false)
-                    let indentifier = String(item)
-                    let request = UNNotificationRequest(identifier: indentifier, content: content, trigger: calendarTrigger)
-                    self.notificationCenter.add(request) { error in
-                        if let error = error {
-                            print (error)
-                        }
-                    }
+            let content = UNMutableNotificationContent()
+            content.body = "Weather conditions will worsen soon"
+            var date = DateComponents()
+            date.hour = Int(item.convertUnix(formattedType: .hour))
+            date.minute = Int(item.convertUnix(formattedType: .minutly))
+            let calendarTrigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: false)
+            let indentifier = String(item)
+            let request = UNNotificationRequest(identifier: indentifier, content: content, trigger: calendarTrigger)
+            self.notificationCenter.add(request) { error in
+                if let error = error {
+                    print (error)
                 }
             }
         }
