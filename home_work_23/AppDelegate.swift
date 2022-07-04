@@ -13,7 +13,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        if let value = Bundle.main.infoDictionary?["Api_Key_Map"] as? String { GMSServices.provideAPIKey(value) }
+        if let value = Bundle.main.infoDictionary?["Api_Key_Map"] as? String { GMSServices.provideAPIKey(value) }       
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .badge, .sound]) {
+            (didAllow, error) in
+            if !didAllow {
+                print("User has declined notifications")
+            }
+        }
         return true
     }
 
