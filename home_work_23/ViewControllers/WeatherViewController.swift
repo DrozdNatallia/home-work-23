@@ -106,6 +106,7 @@ class WeatherViewController: UIViewController {
                 self.provaider.setQueryList(lat: lat, lon: lon, time: date)
                 // MARK: Hourly
                 guard let hourly = value.hourly else {return }
+                var lastTime = 0
                 for item in hourly {
                     guard let hourlyTemp = item.temp, let hourlyDt = item.dt, let weather = item.weather, let icon = weather.first?.icon, let weatherId = weather.first?.id else {return}
                     if let url = URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png") {
@@ -118,8 +119,11 @@ class WeatherViewController: UIViewController {
                     }
                     self.hourlyArrayDt.append(hourlyDt.convertUnix(formattedType: .hour))
                     self.hourlyArrayTemp.append(hourlyTemp)
-                    if weatherId < 800 {
+                    if weatherId < 700 {
+                        if hourlyDt - lastTime > 3600 {
                         self.hourlyArrayBadWeatherDt.append(hourlyDt - 60 * 30)
+                        }
+                        lastTime = hourlyDt
                     }
                 }
                 self.setWeatherNotifications(arrayTime: self.hourlyArrayBadWeatherDt)
