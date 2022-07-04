@@ -15,11 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         if let value = Bundle.main.infoDictionary?["Api_Key_Map"] as? String { GMSServices.provideAPIKey(value) }       
         let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
-            if granted {
-                DispatchQueue.main.async {
-                    application.registerForRemoteNotifications()
-                }
+        center.requestAuthorization(options: [.alert, .badge, .sound]) {
+            (didAllow, error) in
+            if !didAllow {
+                print("User has declined notifications")
             }
         }
         return true
