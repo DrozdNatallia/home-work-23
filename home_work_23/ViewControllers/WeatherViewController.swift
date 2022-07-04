@@ -107,6 +107,9 @@ class WeatherViewController: UIViewController {
                 // MARK: Hourly
                 guard let hourly = value.hourly else {return }
                 var lastTime = 0
+                let snow = 600...700
+                let rain = 300...600
+                let thunderstorm = 200...300
                 for item in hourly {
                     guard let hourlyTemp = item.temp, let hourlyDt = item.dt, let weather = item.weather, let icon = weather.first?.icon, let weatherId = weather.first?.id else {return}
                     if let url = URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png") {
@@ -119,7 +122,7 @@ class WeatherViewController: UIViewController {
                     }
                     self.hourlyArrayDt.append(hourlyDt.convertUnix(formattedType: .hour))
                     self.hourlyArrayTemp.append(hourlyTemp)
-                    if weatherId < 700 {
+                    if snow.contains(weatherId) || rain.contains(weatherId) || thunderstorm.contains(weatherId) {
                         if hourlyDt - lastTime > 3600 {
                         self.hourlyArrayBadWeatherDt.append(hourlyDt - 60 * 30)
                         }
