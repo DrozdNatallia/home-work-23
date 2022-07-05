@@ -9,50 +9,53 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="DailyWeatherCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="DailyWeatherCell" rowHeight="30" id="KGk-i7-Jjw" customClass="DailyWeatherCell" customModule="home_work_23" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="DailyWeatherCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="DailyWeatherCell" rowHeight="31" id="KGk-i7-Jjw" customClass="DailyWeatherCell" customModule="home_work_23" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="205" height="31"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="205" height="31"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="S0O-IS-diP">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="S0O-IS-diP">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="40"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJh-pW-KT1">
-                                <rect key="frame" x="0.0" y="0.0" width="48" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJh-pW-KT1">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="40"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j7q-0b-V7Z">
-                                <rect key="frame" x="89.5" y="0.0" width="50" height="30"/>
+                                <rect key="frame" x="50" y="0.0" width="50" height="40"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="btD-8M-dEw"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfv-0J-Yfd">
-                                <rect key="frame" x="181.5" y="0.0" width="48" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfv-0J-Yfd">
+                                <rect key="frame" x="100" y="0.0" width="50" height="40"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jRl-cB-9ba">
-                                <rect key="frame" x="272" y="0.0" width="48" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jRl-cB-9ba">
+                                <rect key="frame" x="150" y="0.0" width="50" height="40"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="sEX-8U-5IO"/>
+                        </constraints>
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="S0O-IS-diP" secondAttribute="trailing" id="ACo-5b-C1g"/>
+                    <constraint firstAttribute="trailing" secondItem="S0O-IS-diP" secondAttribute="trailing" constant="10" id="ACo-5b-C1g"/>
                     <constraint firstAttribute="bottom" secondItem="S0O-IS-diP" secondAttribute="bottom" id="P1x-A7-jbg"/>
                     <constraint firstItem="S0O-IS-diP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="m3d-oW-u0A"/>
                     <constraint firstItem="S0O-IS-diP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="uib-zs-m3T"/>
@@ -66,7 +69,7 @@
                 <outlet property="maxTemp" destination="gfv-0J-Yfd" id="fKO-Mi-Eak"/>
                 <outlet property="minTemp" destination="jRl-cB-9ba" id="a8g-xg-Ia9"/>
             </connections>
-            <point key="canvasLocation" x="133" y="78"/>
+            <point key="canvasLocation" x="54.347826086956523" y="33.147321428571431"/>
         </tableViewCell>
     </objects>
 </document>
