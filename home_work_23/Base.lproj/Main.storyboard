@@ -41,24 +41,49 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ein-he-h74">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ein-he-h74">
+                                <rect key="frame" x="0.0" y="63" width="414" height="769"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemTealColor"/>
                             </tableView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OjX-Cz-AEv">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="QA3-pb-WAi">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="769"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="dY5-1k-CcT">
+                                            <rect key="frame" x="182" y="359.5" width="50" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="50" id="fgj-4I-v0k"/>
+                                                <constraint firstAttribute="height" constant="50" id="jPZ-0n-02J"/>
+                                            </constraints>
+                                            <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </activityIndicatorView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="dY5-1k-CcT" firstAttribute="centerY" secondItem="QA3-pb-WAi" secondAttribute="centerY" id="HOt-dG-hF2"/>
+                                        <constraint firstItem="dY5-1k-CcT" firstAttribute="centerX" secondItem="QA3-pb-WAi" secondAttribute="centerX" id="lzo-5h-4tn"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemMintColor"/>
                         <constraints>
-                            <constraint firstItem="Ein-he-h74" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="HmO-YN-ice"/>
-                            <constraint firstItem="Ein-he-h74" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="QaO-Jr-PU2"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ein-he-h74" secondAttribute="trailing" id="gJ0-tb-EIg"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ein-he-h74" secondAttribute="bottom" id="sRf-fM-TRP"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="OjX-Cz-AEv" secondAttribute="bottom" id="8NL-lP-eP1"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="OjX-Cz-AEv" secondAttribute="trailing" id="T67-wG-QMv"/>
+                            <constraint firstItem="OjX-Cz-AEv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="V13-A9-Ktt"/>
+                            <constraint firstItem="OjX-Cz-AEv" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="rDW-Nh-rHE"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Current Weather" id="bbe-Ma-CM8">
                         <imageReference key="image" image="circle.fill" catalog="system" symbolScale="large"/>
                     </tabBarItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="dY5-1k-CcT" id="C14-B0-IXO"/>
+                        <outlet property="blurEffectView" destination="OjX-Cz-AEv" id="ddW-2e-D2E"/>
                         <outlet property="tableView" destination="Ein-he-h74" id="wao-XJ-ZFs"/>
                     </connections>
                 </viewController>

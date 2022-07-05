@@ -10,6 +10,11 @@ import Alamofire
 import RealmSwift
 
 class WeatherViewController: UIViewController {
+
+    @IBOutlet weak var blurEffectView: UIVisualEffectView!
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     private var apiProvider: RestAPIProviderProtocol!
     private var provaider: RealmProviderProtocol!
     var nameCity: String!
@@ -48,6 +53,8 @@ class WeatherViewController: UIViewController {
     let notificationCenter = UNUserNotificationCenter.current()
     override func viewDidLoad() {
         super.viewDidLoad()
+        blurEffectView.isHidden = false
+        activityIndicator.startAnimating()
         nameCity = "Minsk"
         tableView.delegate = self
         tableView.dataSource = self
@@ -95,6 +102,8 @@ class WeatherViewController: UIViewController {
     
     private func getWeatherByCoordinates(city: InfoCity) {
         apiProvider.getWeatherForCityCoordinates(lat: city.lat, lon: city.lon) { [weak self] result in
+            self?.blurEffectView.isHidden = true
+            self?.activityIndicator.stopAnimating()
             guard let self = self else {return}
             switch result {
             case .success(let value):
