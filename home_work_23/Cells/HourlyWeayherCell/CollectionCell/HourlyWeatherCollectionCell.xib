@@ -16,6 +16,25 @@
                 <rect key="frame" x="0.0" y="0.0" width="50" height="45"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
+                    <visualEffectView opaque="NO" alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kjt-zy-bdd">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="45"/>
+                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="vvD-1d-qKD">
+                            <rect key="frame" x="0.0" y="0.0" width="50" height="45"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mYA-r0-CVc">
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="M8P-Ky-Let">
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </view>
+                                    <vibrancyEffect>
+                                        <blurEffect style="regular"/>
+                                    </vibrancyEffect>
+                                </visualEffectView>
+                            </subviews>
+                        </view>
+                        <blurEffect style="dark"/>
+                    </visualEffectView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="lZo-FN-Emc">
                         <rect key="frame" x="0.0" y="0.0" width="50" height="45"/>
                         <subviews>
@@ -44,15 +63,18 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </stackView>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="lZo-FN-Emc" secondAttribute="trailing" id="B5L-im-Oho"/>
+                <constraint firstAttribute="trailing" secondItem="Kjt-zy-bdd" secondAttribute="trailing" id="CMZ-20-tiP"/>
+                <constraint firstItem="Kjt-zy-bdd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="EY3-mv-Ips"/>
                 <constraint firstAttribute="bottom" secondItem="lZo-FN-Emc" secondAttribute="bottom" id="Ehj-l2-Wf8"/>
+                <constraint firstAttribute="bottom" secondItem="Kjt-zy-bdd" secondAttribute="bottom" id="MBi-fU-tIu"/>
                 <constraint firstItem="lZo-FN-Emc" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Uwa-FK-Vsv"/>
+                <constraint firstItem="Kjt-zy-bdd" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="d8B-tl-MW6"/>
                 <constraint firstItem="lZo-FN-Emc" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="rWf-Pe-W38"/>
             </constraints>
             <size key="customSize" width="93" height="91"/>
@@ -61,7 +83,7 @@
                 <outlet property="imageWeayherView" destination="FkJ-qg-ddh" id="0m4-P7-zS2"/>
                 <outlet property="temp" destination="cCb-tJ-sFd" id="Diw-bx-g0j"/>
             </connections>
-            <point key="canvasLocation" x="163.04347826086959" y="90.736607142857139"/>
+            <point key="canvasLocation" x="162.31884057971016" y="90.736607142857139"/>
         </collectionViewCell>
     </objects>
 </document>

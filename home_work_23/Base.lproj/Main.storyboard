@@ -16,7 +16,7 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xGD-mb-WE0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
                                 <color key="value" systemColor="systemRedColor"/>
@@ -41,19 +41,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ein-he-h74">
-                                <rect key="frame" x="0.0" y="63" width="414" height="769"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemTealColor"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="1" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ein-he-h74">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" red="0.417776123" green="0.63737708910000002" blue="0.76859849690000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OjX-Cz-AEv">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="QA3-pb-WAi">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="769"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="dY5-1k-CcT">
-                                            <rect key="frame" x="182" y="359.5" width="50" height="50"/>
+                                            <rect key="frame" x="182" y="423" width="50" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="50" id="fgj-4I-v0k"/>
                                                 <constraint firstAttribute="height" constant="50" id="jPZ-0n-02J"/>
@@ -66,20 +66,25 @@
                                         <constraint firstItem="dY5-1k-CcT" firstAttribute="centerX" secondItem="QA3-pb-WAi" secondAttribute="centerX" id="lzo-5h-4tn"/>
                                     </constraints>
                                 </view>
+                                <color key="backgroundColor" red="0.33223429609999999" green="0.5068708261" blue="0.61122397039999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <blurEffect style="light"/>
                             </visualEffectView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemMintColor"/>
+                        <color key="backgroundColor" red="0.417776123" green="0.63737708910000002" blue="0.76859849690000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="OjX-Cz-AEv" secondAttribute="bottom" id="8NL-lP-eP1"/>
+                            <constraint firstItem="Ein-he-h74" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="0Z1-fM-aO7"/>
+                            <constraint firstAttribute="bottom" secondItem="OjX-Cz-AEv" secondAttribute="bottom" id="8NL-lP-eP1"/>
+                            <constraint firstAttribute="bottom" secondItem="Ein-he-h74" secondAttribute="bottom" id="B7b-4N-djw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="OjX-Cz-AEv" secondAttribute="trailing" id="T67-wG-QMv"/>
                             <constraint firstItem="OjX-Cz-AEv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="V13-A9-Ktt"/>
-                            <constraint firstItem="OjX-Cz-AEv" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="rDW-Nh-rHE"/>
+                            <constraint firstItem="Ein-he-h74" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="XI8-lE-GRD"/>
+                            <constraint firstItem="OjX-Cz-AEv" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="rDW-Nh-rHE"/>
+                            <constraint firstItem="Ein-he-h74" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="s6g-Vg-NQ3"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Current Weather" id="bbe-Ma-CM8">
-                        <imageReference key="image" image="circle.fill" catalog="system" symbolScale="large"/>
+                        <imageReference key="image" image="cloud" catalog="system" symbolScale="large"/>
                     </tabBarItem>
                     <connections>
                         <outlet property="activityIndicator" destination="dY5-1k-CcT" id="C14-B0-IXO"/>
@@ -102,7 +107,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Weather on Map" id="01w-p3-gFj">
-                        <imageReference key="image" image="circle.fill" catalog="system" symbolScale="large"/>
+                        <imageReference key="image" image="map" catalog="system" symbolScale="large"/>
                     </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ews-5l-pv1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -131,7 +136,7 @@
                             <constraint firstItem="bUj-mK-3af" firstAttribute="bottom" secondItem="lx1-wV-3Ih" secondAttribute="bottom" id="pQO-hv-fBJ"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="List all request" image="circle.fill" catalog="system" id="gF4-MS-kM9"/>
+                    <tabBarItem key="tabBarItem" title="List all request" image="list.bullet.rectangle.portrait" catalog="system" id="gF4-MS-kM9"/>
                     <connections>
                         <outlet property="tableViewRequest" destination="lx1-wV-3Ih" id="mH0-v3-ENw"/>
                     </connections>
@@ -142,18 +147,14 @@
         </scene>
     </scenes>
     <resources>
-        <image name="circle.fill" catalog="system" width="128" height="121"/>
+        <image name="cloud" catalog="system" width="128" height="88"/>
+        <image name="list.bullet.rectangle.portrait" catalog="system" width="115" height="128"/>
+        <image name="map" catalog="system" width="128" height="110"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="systemMintColor">
-            <color red="0.0" green="0.7803921568627451" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemTealColor">
-            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
