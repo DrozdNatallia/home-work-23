@@ -53,10 +53,6 @@ class WeatherViewController: UIViewController {
     let notificationCenter = UNUserNotificationCenter.current()
     override func viewDidLoad() {
         super.viewDidLoad()
-        let realm = try! Realm()
-        try! realm.write {
-            realm.deleteAll()
-        }
         blurEffectView.isHidden = false
         activityIndicator.startAnimating()
         nameCity = "Minsk"
