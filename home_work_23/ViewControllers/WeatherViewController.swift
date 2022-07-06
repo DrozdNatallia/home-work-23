@@ -44,7 +44,7 @@ class WeatherViewController: UIViewController {
             case .current:
                 return "Current weather"
             case .hourly:
-                return "Houly weather"
+                return "Hourly weather"
             case .daily:
                 return "Daily weather"
             }
@@ -53,10 +53,10 @@ class WeatherViewController: UIViewController {
     let notificationCenter = UNUserNotificationCenter.current()
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let realm = try! Realm()
-//        try! realm.write {
-//            realm.deleteAll()
-//        }
+        let realm = try! Realm()
+        try! realm.write {
+            realm.deleteAll()
+        }
         blurEffectView.isHidden = false
         activityIndicator.startAnimating()
         nameCity = "Minsk"
