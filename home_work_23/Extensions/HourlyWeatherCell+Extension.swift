@@ -17,7 +17,7 @@ extension HourlyWeatherCell: UICollectionViewDelegate, UICollectionViewDataSourc
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HourlyWeatherCollectionCell.key, for: indexPath) as? HourlyWeatherCollectionCell {
             guard let tempArray = tempArray, let dtArray = dtArray, let imageArray = imageArray else {return cell }
             cell.hours.text = dtArray[indexPath.row].description
-            cell.temp.text = "\(tempArray[indexPath.row])°"
+            cell.temp.text = "\(Int(tempArray[indexPath.row]))°"
             cell.imageWeayherView.image = imageArray[indexPath.row]
             
             return cell

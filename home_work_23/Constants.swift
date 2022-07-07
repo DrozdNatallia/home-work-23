@@ -18,8 +18,4 @@ struct Constants {
     static var weatherURL: String {
         return baseURL.appending("data/2.5/onecall")
     }
-//    static var imageURL: String {
-//        return baseURL.appending("img/wn/")
-//    }
-
 }

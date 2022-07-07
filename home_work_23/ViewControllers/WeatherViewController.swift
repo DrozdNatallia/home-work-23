@@ -10,6 +10,11 @@ import Alamofire
 import RealmSwift
 
 class WeatherViewController: UIViewController {
+
+    @IBOutlet weak var blurEffectView: UIVisualEffectView!
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     private var apiProvider: RestAPIProviderProtocol!
     private var provaider: RealmProviderProtocol!
     var nameCity: String!
@@ -28,6 +33,7 @@ class WeatherViewController: UIViewController {
     var hourlyArrayDt: [String] = []
     var hourlyArrayImage: [UIImage] = []
     var hourlyArrayBadWeatherDt: [Int] = []
+    var hourlyArrayBadWeatherId: [Int] = []
     
     enum ContentType: Int {
         case current = 0
@@ -38,26 +44,40 @@ class WeatherViewController: UIViewController {
             case .current:
                 return "Current weather"
             case .hourly:
-                return "Houly weather"
+                return "Hourly weather"
             case .daily:
                 return "Daily weather"
             }
         }
     }
     let notificationCenter = UNUserNotificationCenter.current()
+    var refreshControl: UIRefreshControl!
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameCity = "Moskow"
+        blurEffectView.isHidden = false
+        activityIndicator.startAnimating()
+        nameCity = "Minsk"
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "CurrentWeatherCell", bundle: nil), forCellReuseIdentifier: CurrentWeatherCell.key)
         tableView.register(UINib(nibName: "HourlyWeatherCell", bundle: nil), forCellReuseIdentifier: HourlyWeatherCell.key)
         tableView.register(UINib(nibName: "DailyWeatherCell", bundle: nil), forCellReuseIdentifier: DailyWeatherCell.key)
         
+        refreshControl = UIRefreshControl()
+        tableView.refreshControl = refreshControl
+        refreshControl.attributedTitle = NSAttributedString(string: "Refreshing")
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        
         notificationCenter.removeAllPendingNotificationRequests()
         provaider = RealmProvader()
         apiProvider = AlamofireProvaider()
         getCoordinatesByName()
+    }
+    
+    
+    @objc private func refresh() {
+        tableView.reloadData()
+        refreshControl.endRefreshing()
     }
     
     fileprivate func getCoordinatesByName() {
@@ -76,19 +96,18 @@ class WeatherViewController: UIViewController {
     }
     
     private func setWeatherNotifications(arrayTime: [Int]) {
-        for item in arrayTime {
-            let content = UNMutableNotificationContent()
-            content.body = "Weather conditions will worsen soon"
-            var date = DateComponents()
-            date.hour = Int(item.convertUnix(formattedType: .hour))
-            date.minute = Int(item.convertUnix(formattedType: .minutly))
-            let calendarTrigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: false)
-            let indentifier = String(item)
-            let request = UNNotificationRequest(identifier: indentifier, content: content, trigger: calendarTrigger)
-            self.notificationCenter.add(request) { error in
-                if let error = error {
-                    print (error)
-                }
+        guard let time = arrayTime.first else {return}
+        let content = UNMutableNotificationContent()
+        content.body = "Weather conditions will worsen soon"
+        var date = DateComponents()
+        date.hour = Int(time.convertUnix(formattedType: .hour))
+        date.minute = Int(time.convertUnix(formattedType: .minutly))
+        let calendarTrigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: false)
+        let indentifier = String(time)
+        let request = UNNotificationRequest(identifier: indentifier, content: content, trigger: calendarTrigger)
+        self.notificationCenter.add(request) { error in
+            if let error = error {
+                print (error)
             }
         }
     }
@@ -96,6 +115,8 @@ class WeatherViewController: UIViewController {
     private func getWeatherByCoordinates(city: InfoCity) {
         apiProvider.getWeatherForCityCoordinates(lat: city.lat, lon: city.lon) { [weak self] result in
             guard let self = self else {return}
+            self.blurEffectView.isHidden = true
+            self.activityIndicator.stopAnimating()
             switch result {
             case .success(let value):
                 guard let current = value.current, let weather = current.weather, let temp = current.temp, let clouds = weather.first?.description, let lat = value.lat, let lon = value.lon else {return}
@@ -104,12 +125,12 @@ class WeatherViewController: UIViewController {
                 let date = Int(Date().timeIntervalSince1970)
                 self.provaider.setCurrentWeatherQueryList(temp: temp, weather: clouds, time: date)
                 self.provaider.setQueryList(lat: lat, lon: lon, time: date)
+                
                 // MARK: Hourly
                 guard let hourly = value.hourly else {return }
-                var lastTime = 0
-                let snow = 600...700
-                let rain = 300...600
-                let thunderstorm = 200...300
+                let snow = 600...699
+                let rain = 500...599
+                let thunderstorm = 200...299
                 for item in hourly {
                     guard let hourlyTemp = item.temp, let hourlyDt = item.dt, let weather = item.weather, let icon = weather.first?.icon, let weatherId = weather.first?.id else {return}
                     if let url = URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png") {
@@ -122,14 +143,14 @@ class WeatherViewController: UIViewController {
                     }
                     self.hourlyArrayDt.append(hourlyDt.convertUnix(formattedType: .hour))
                     self.hourlyArrayTemp.append(hourlyTemp)
+                    self.hourlyArrayBadWeatherId.append(weatherId)
+                    
                     if snow.contains(weatherId) || rain.contains(weatherId) || thunderstorm.contains(weatherId) {
-                        if hourlyDt - lastTime > 3600 {
                         self.hourlyArrayBadWeatherDt.append(hourlyDt - 60 * 30)
-                        }
-                        lastTime = hourlyDt
                     }
                 }
                 self.setWeatherNotifications(arrayTime: self.hourlyArrayBadWeatherDt)
+                
                 // MARK: DAILY
                 guard let daily = value.daily else {return }
                 
@@ -153,7 +174,6 @@ class WeatherViewController: UIViewController {
             case .failure(let error):
                 print(error)
             }
-            
         }
     }
 }
