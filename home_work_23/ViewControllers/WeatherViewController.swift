@@ -51,6 +51,7 @@ class WeatherViewController: UIViewController {
         }
     }
     let notificationCenter = UNUserNotificationCenter.current()
+    var refreshControl: UIRefreshControl!
     override func viewDidLoad() {
         super.viewDidLoad()
         blurEffectView.isHidden = false
@@ -62,10 +63,22 @@ class WeatherViewController: UIViewController {
         tableView.register(UINib(nibName: "HourlyWeatherCell", bundle: nil), forCellReuseIdentifier: HourlyWeatherCell.key)
         tableView.register(UINib(nibName: "DailyWeatherCell", bundle: nil), forCellReuseIdentifier: DailyWeatherCell.key)
         
+        refreshControl = UIRefreshControl()
+        tableView.refreshControl = refreshControl
+        refreshControl.attributedTitle = NSAttributedString(string: "Refreshing")
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+        
         notificationCenter.removeAllPendingNotificationRequests()
         provaider = RealmProvader()
         apiProvider = AlamofireProvaider()
         getCoordinatesByName()
+    }
+    
+    
+    @objc private func refresh() {
+        tableView.reloadData()
+        refreshControl.endRefreshing()
     }
     
     fileprivate func getCoordinatesByName() {
@@ -102,9 +115,9 @@ class WeatherViewController: UIViewController {
     
     private func getWeatherByCoordinates(city: InfoCity) {
         apiProvider.getWeatherForCityCoordinates(lat: city.lat, lon: city.lon) { [weak self] result in
-            self?.blurEffectView.isHidden = true
-            self?.activityIndicator.stopAnimating()
             guard let self = self else {return}
+            self.blurEffectView.isHidden = true
+            self.activityIndicator.stopAnimating()
             switch result {
             case .success(let value):
                 guard let current = value.current, let weather = current.weather, let temp = current.temp, let clouds = weather.first?.description, let lat = value.lat, let lon = value.lon else {return}
