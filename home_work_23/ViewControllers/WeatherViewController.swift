@@ -67,7 +67,6 @@ class WeatherViewController: UIViewController {
         tableView.refreshControl = refreshControl
         refreshControl.attributedTitle = NSAttributedString(string: "Refreshing")
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        tableView.addSubview(refreshControl)
         
         notificationCenter.removeAllPendingNotificationRequests()
         provaider = RealmProvader()
