@@ -16,7 +16,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="459" height="63"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <collectionView clipsSubviews="YES" contentMode="scaleAspectFit" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Zbq-j1-Ovg">
+                    <collectionView clipsSubviews="YES" contentMode="scaleAspectFit" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Zbq-j1-Ovg">
                         <rect key="frame" x="0.0" y="0.0" width="459" height="60"/>
                         <color key="backgroundColor" red="0.417776123" green="0.63737708910000002" blue="0.76859849690000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
