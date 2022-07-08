@@ -28,6 +28,8 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
         case .current:
             if let cell = tableView.dequeueReusableCell(withIdentifier: CurrentWeatherCell.key) as? CurrentWeatherCell {
                 guard let nameCity = nameCity, let temp = temp, let clouds = currentClouds, let maxTemp = dailyMaxTempArray.max(), let minTemp = dailyMaxTempArray.min() else {return cell}
+                cell.layer.backgroundColor = UIColor.clear.cgColor
+                cell.backgroundColor = .clear
                     cell.nameCity.text = nameCity
                     cell.currentTemp.text = "\(Int(temp))°"
                     cell.currentClouds.text = clouds
@@ -37,6 +39,8 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
         case .hourly:
             
             if let cell = tableView.dequeueReusableCell(withIdentifier: "HourlyWeatherCell", for: indexPath) as? HourlyWeatherCell {
+                cell.layer.backgroundColor = UIColor.clear.cgColor
+                cell.backgroundColor = .clear
                 cell.tempArray = hourlyArrayTemp
                 cell.dtArray = hourlyArrayDt
                 cell.imageArray = hourlyArrayImage
@@ -45,6 +49,9 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
             }
         default:
             if let cell = tableView.dequeueReusableCell(withIdentifier: DailyWeatherCell.key) as? DailyWeatherCell {
+                cell.contentView.backgroundColor = UIColor.clear
+                cell.layer.backgroundColor = UIColor.clear.cgColor
+                cell.backgroundColor = .clear
                 cell.days.text = "\(dailyArrayDt[indexPath.row])"
                 cell.minTemp.text = "Min: \(Int(dailyArrayMinTemp[indexPath.row]))°"
                 cell.maxTemp.text = "Max: \(Int(dailyMaxTempArray[indexPath.row]))°"

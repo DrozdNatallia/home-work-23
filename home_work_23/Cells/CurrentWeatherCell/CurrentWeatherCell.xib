@@ -35,6 +35,7 @@
                                 </visualEffectView>
                             </subviews>
                         </view>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <blurEffect style="dark"/>
                     </visualEffectView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="gVC-4q-255">
@@ -80,7 +81,6 @@
                         </subviews>
                     </stackView>
                 </subviews>
-                <color key="backgroundColor" red="0.417776123" green="0.63737708910000002" blue="0.76859849690000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="gVC-4q-255" secondAttribute="bottom" constant="10" id="7Bm-xx-YNu"/>
                     <constraint firstAttribute="bottom" secondItem="GLm-Vk-wUZ" secondAttribute="bottom" id="8Yz-gG-d3I"/>

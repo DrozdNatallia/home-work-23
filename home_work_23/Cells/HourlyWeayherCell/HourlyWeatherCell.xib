@@ -18,7 +18,7 @@
                 <subviews>
                     <collectionView clipsSubviews="YES" contentMode="scaleAspectFit" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Zbq-j1-Ovg">
                         <rect key="frame" x="0.0" y="0.0" width="459" height="60"/>
-                        <color key="backgroundColor" red="0.417776123" green="0.63737708910000002" blue="0.76859849690000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="60" id="Ur1-af-Evh"/>
                         </constraints>
@@ -34,7 +34,6 @@
                         </connections>
                     </collectionView>
                 </subviews>
-                <color key="backgroundColor" red="0.417776123" green="0.63737708910000002" blue="0.76859849690000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="Zbq-j1-Ovg" secondAttribute="trailing" id="1qQ-aa-14x"/>
                     <constraint firstItem="Zbq-j1-Ovg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="BJI-t2-4sc"/>

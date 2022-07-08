@@ -54,6 +54,12 @@ class WeatherViewController: UIViewController {
     var refreshControl: UIRefreshControl!
     override func viewDidLoad() {
         super.viewDidLoad()
+        let realm = try! Realm()
+        try! realm.write {
+            realm.deleteAll()
+        }
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "e6d438f7bc89107d163f0db9f1e1f601.jpeg")!)
+        
         blurEffectView.isHidden = false
         activityIndicator.startAnimating()
         nameCity = "Minsk"
@@ -62,6 +68,9 @@ class WeatherViewController: UIViewController {
         tableView.register(UINib(nibName: "CurrentWeatherCell", bundle: nil), forCellReuseIdentifier: CurrentWeatherCell.key)
         tableView.register(UINib(nibName: "HourlyWeatherCell", bundle: nil), forCellReuseIdentifier: HourlyWeatherCell.key)
         tableView.register(UINib(nibName: "DailyWeatherCell", bundle: nil), forCellReuseIdentifier: DailyWeatherCell.key)
+        
+        tableView.layer.backgroundColor = UIColor.clear.cgColor
+        tableView.backgroundColor = .clear
         
         refreshControl = UIRefreshControl()
         tableView.refreshControl = refreshControl
@@ -76,7 +85,9 @@ class WeatherViewController: UIViewController {
     
     
     @objc private func refresh() {
-        tableView.reloadData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.tableView.reloadData()
+        }
         refreshControl.endRefreshing()
     }
     
