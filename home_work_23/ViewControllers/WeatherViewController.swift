@@ -8,9 +8,20 @@
 import UIKit
 import Alamofire
 import RealmSwift
+import GoogleMaps
+import CoreLocation
 
-class WeatherViewController: UIViewController {
-
+class WeatherViewController: UIViewController{
+    
+    private lazy var coreManager: CLLocationManager = {
+        let manager = CLLocationManager()
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        return manager
+    }()
+    
+    @IBOutlet weak var locationButton: UIButton!
+    
+    @IBOutlet weak var searchPlaceButton: UIButton!
     @IBOutlet weak var blurEffectView: UIVisualEffectView!
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -52,12 +63,16 @@ class WeatherViewController: UIViewController {
     }
     let notificationCenter = UNUserNotificationCenter.current()
     var refreshControl: UIRefreshControl!
+    
+    var currentCoordinate: CLLocationCoordinate2D!
+    var currentName: String!
     override func viewDidLoad() {
         super.viewDidLoad()
         let realm = try! Realm()
         try! realm.write {
             realm.deleteAll()
         }
+        coreManager.delegate = self
         view.backgroundColor = UIColor(patternImage: UIImage(named: "e6d438f7bc89107d163f0db9f1e1f601.jpeg")!)
         
         blurEffectView.isHidden = false
@@ -78,6 +93,7 @@ class WeatherViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         
         notificationCenter.removeAllPendingNotificationRequests()
+        
         provaider = RealmProvader()
         apiProvider = AlamofireProvaider()
         getCoordinatesByName()
@@ -91,6 +107,18 @@ class WeatherViewController: UIViewController {
         refreshControl.endRefreshing()
     }
     
+    @IBAction func onLocationButton(_ sender: Any) {
+        
+        coreManager.requestWhenInUseAuthorization()
+        self.blurEffectView.isHidden = false
+        self.activityIndicator.startAnimating()
+        self.nameCity = currentName
+        self.getWeatherByCoordinates(cityLat: Double(currentCoordinate.latitude), cityLon: Double(currentCoordinate.longitude))   
+    }
+    
+    
+    
+    
     fileprivate func getCoordinatesByName() {
         guard let nameCity = nameCity else {return}
         apiProvider.getCoordinatesByName(name: nameCity) { [weak self] result in
@@ -98,7 +126,8 @@ class WeatherViewController: UIViewController {
             switch result {
             case .success(let value):
                 if let city = value.first {
-                    self.getWeatherByCoordinates(city: city)
+                    self.nameCity = city.name
+                    self.getWeatherByCoordinates(cityLat: city.lat, cityLon: city.lon)
                 }
             case .failure(let error):
                 print(error.localizedDescription)
@@ -123,8 +152,12 @@ class WeatherViewController: UIViewController {
         }
     }
     
-    private func getWeatherByCoordinates(city: InfoCity) {
-        apiProvider.getWeatherForCityCoordinates(lat: city.lat, lon: city.lon) { [weak self] result in
+    
+    
+    
+    
+    private func getWeatherByCoordinates(cityLat: Double, cityLon: Double) {
+        apiProvider.getWeatherForCityCoordinates(lat: cityLat, lon: cityLon) { [weak self] result in
             guard let self = self else {return}
             self.blurEffectView.isHidden = true
             self.activityIndicator.stopAnimating()
@@ -189,3 +222,39 @@ class WeatherViewController: UIViewController {
     }
 }
 
+
+
+
+
+
+
+
+extension WeatherViewController: CLLocationManagerDelegate {
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        if manager.authorizationStatus == .authorizedAlways || manager.authorizationStatus == .authorizedWhenInUse {
+            coreManager.startUpdatingLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+       guard let location = locations.first else {return}
+        self.currentCoordinate = location.coordinate
+        
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+            if let error = error {
+                print("Unable to Reverse Geocode Location (\(error))")
+            } else {
+                if let placemarks = placemarks, let placemark = placemarks.first {
+                    self.currentName = placemark.locality!
+                }
+            }
+        }
+        
+    }
+    
+    
+
+}

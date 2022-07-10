@@ -39,7 +39,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ein-he-h74">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="94" width="414" height="802"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" red="0.417776123" green="0.63737708910000002" blue="0.76859849690000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </tableView>
@@ -66,6 +66,21 @@
                                 <color key="backgroundColor" red="0.33223429609999999" green="0.5068708261" blue="0.61122397039999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <blurEffect style="light"/>
                             </visualEffectView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W0X-l5-xmi">
+                                <rect key="frame" x="359.5" y="44" width="46.5" height="31"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="paperplane.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="onLocationButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c3w-xU-gJx"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m4I-0A-6pO">
+                                <rect key="frame" x="314.5" y="44" width="45.5" height="31"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.417776123" green="0.63737708910000002" blue="0.76859849690000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -73,11 +88,15 @@
                             <constraint firstItem="Ein-he-h74" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="0Z1-fM-aO7"/>
                             <constraint firstAttribute="bottom" secondItem="OjX-Cz-AEv" secondAttribute="bottom" id="8NL-lP-eP1"/>
                             <constraint firstAttribute="bottom" secondItem="Ein-he-h74" secondAttribute="bottom" id="B7b-4N-djw"/>
+                            <constraint firstItem="W0X-l5-xmi" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Lg5-Je-9Ax"/>
+                            <constraint firstItem="OjX-Cz-AEv" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="QMq-jf-HUX"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="OjX-Cz-AEv" secondAttribute="trailing" id="T67-wG-QMv"/>
                             <constraint firstItem="OjX-Cz-AEv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="V13-A9-Ktt"/>
-                            <constraint firstItem="Ein-he-h74" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="XI8-lE-GRD"/>
-                            <constraint firstItem="OjX-Cz-AEv" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="rDW-Nh-rHE"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="W0X-l5-xmi" secondAttribute="trailing" multiplier="1.02" id="X9j-61-Lne"/>
+                            <constraint firstItem="Ein-he-h74" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="XI8-lE-GRD"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="m4I-0A-6pO" secondAttribute="trailing" multiplier="1.15" id="fmr-0O-x53"/>
                             <constraint firstItem="Ein-he-h74" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="s6g-Vg-NQ3"/>
+                            <constraint firstItem="m4I-0A-6pO" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="xc3-S1-yZb"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Current Weather" id="bbe-Ma-CM8">
@@ -86,6 +105,8 @@
                     <connections>
                         <outlet property="activityIndicator" destination="dY5-1k-CcT" id="C14-B0-IXO"/>
                         <outlet property="blurEffectView" destination="OjX-Cz-AEv" id="ddW-2e-D2E"/>
+                        <outlet property="locationButton" destination="W0X-l5-xmi" id="iac-hP-LVO"/>
+                        <outlet property="searchPlaceButton" destination="m4I-0A-6pO" id="Web-Ve-jCK"/>
                         <outlet property="tableView" destination="Ein-he-h74" id="wao-XJ-ZFs"/>
                     </connections>
                 </viewController>
@@ -146,7 +167,9 @@
     <resources>
         <image name="cloud" catalog="system" width="128" height="88"/>
         <image name="list.bullet.rectangle.portrait" catalog="system" width="115" height="128"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="map" catalog="system" width="128" height="110"/>
+        <image name="paperplane.fill" catalog="system" width="128" height="118"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
