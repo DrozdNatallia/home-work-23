@@ -8,12 +8,11 @@
 import UIKit
 import Alamofire
 import RealmSwift
-import GoogleMaps
 import CoreLocation
 
 class WeatherViewController: UIViewController {
     
-    private lazy var coreManager: CLLocationManager = {
+    lazy var coreManager: CLLocationManager = {
         let manager = CLLocationManager()
         manager.desiredAccuracy = kCLLocationAccuracyBest
         return manager
@@ -23,9 +22,7 @@ class WeatherViewController: UIViewController {
     
     @IBOutlet weak var searchPlaceButton: UIButton!
     @IBOutlet weak var blurEffectView: UIVisualEffectView!
-    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
     private var apiProvider: RestAPIProviderProtocol!
     private var provaider: RealmProviderProtocol!
     var nameCity: String!
@@ -46,34 +43,12 @@ class WeatherViewController: UIViewController {
     var hourlyArrayBadWeatherDt: [Int] = []
     var hourlyArrayBadWeatherId: [Int] = []
     
-    enum ContentType: Int {
-        case current = 0
-        case hourly
-        case daily
-        var description: String {
-            switch self {
-            case .current:
-                return "Current weather"
-            case .hourly:
-                return "Hourly weather"
-            case .daily:
-                return "Daily weather"
-            }
-        }
-    }
     let notificationCenter = UNUserNotificationCenter.current()
     var refreshControl: UIRefreshControl!
     
     var currentCoordinate: CLLocationCoordinate2D!
     var currentName: String!
     var newNameCity: UITextField!
-    
-    
-    enum ModeType {
-        case navigation
-        case selectionCity
-        
-    }
     
     var selectionMode: ModeType = .navigation {
         didSet {
@@ -124,7 +99,7 @@ class WeatherViewController: UIViewController {
         getCoordinatesByName()
     }
     
-    
+    // MARK: Refresh tableView
     @objc private func refresh() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.tableView.reloadData()
@@ -132,7 +107,7 @@ class WeatherViewController: UIViewController {
         refreshControl.endRefreshing()
     }
     
-  // MARK: get location weather
+    // MARK: Location weather
     @IBAction func onLocationButton(_ sender: Any) {
         selectionMode = .navigation
         coreManager.requestWhenInUseAuthorization()
@@ -146,20 +121,20 @@ class WeatherViewController: UIViewController {
         self.getWeatherByCoordinates(cityLat: Double(currentCoordinate.latitude), cityLon: Double(currentCoordinate.longitude))
     }
     
- // MARK: Search Button
+    // MARK: Search City
     @IBAction func onSearchButton(_ sender: Any) {
         selectionMode = .selectionCity
         let alert = UIAlertController(title: "Enter the name of the city", message: nil, preferredStyle: .alert)
-
+        
         alert.addTextField { textField in
             textField.placeholder = "Enter name"
             self.newNameCity = textField
         }
-
+        
         let okButton = UIAlertAction(title: "Ok", style: .default) { [weak self] _ in
             guard let self = self else {return}
             guard let newName = self.newNameCity.text else {return}
-
+            
             self.nameCity = newName
             self.blurEffectView.isHidden = false
             self.activityIndicator.startAnimating()
@@ -169,9 +144,10 @@ class WeatherViewController: UIViewController {
         alert.addAction(okButton)
         alert.addAction(cancelButton)
         present(alert, animated: true)
-
+        
     }
     
+    // MARK: getCoordinatesByName
     fileprivate func getCoordinatesByName() {
         guard var nameCity = nameCity else {return}
         apiProvider.getCoordinatesByName(name: nameCity) { [weak self] result in
@@ -197,7 +173,7 @@ class WeatherViewController: UIViewController {
         
         
     }
-    
+    // MARK: Notifications
     private func setWeatherNotifications(arrayTime: [Int]) {
         guard let time = arrayTime.first else {return}
         let content = UNMutableNotificationContent()
@@ -214,11 +190,7 @@ class WeatherViewController: UIViewController {
             }
         }
     }
-    
-    
-    
-    
-    
+    // MARK: getWeatherByCoordinates
     private func getWeatherByCoordinates(cityLat: Double, cityLon: Double) {
         apiProvider.getWeatherForCityCoordinates(lat: cityLat, lon: cityLon) { [weak self] result in
             guard let self = self else {return}
@@ -289,43 +261,6 @@ class WeatherViewController: UIViewController {
                 self.tableView.reloadData()
             case .failure(let error):
                 print(error)
-            }
-        }
-    }
-}
-
-
-
-
-
-
-
-
-extension WeatherViewController: CLLocationManagerDelegate {
-    
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        if manager.authorizationStatus == .authorizedAlways || manager.authorizationStatus == .authorizedWhenInUse {
-            coreManager.startUpdatingLocation()
-            
-        } else if manager.authorizationStatus == .restricted || manager.authorizationStatus == .denied || manager.authorizationStatus == .notDetermined {
-            locationButton.isEnabled = false
-        }
-
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-
-       guard let location = locations.first else {return}
-        self.currentCoordinate = location.coordinate
-        
-        let geocoder = CLGeocoder()
-        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
-            if let error = error {
-                print("Unable to Reverse Geocode Location (\(error))")
-            } else {
-                if let placemarks = placemarks, let placemark = placemarks.first {
-                    self.currentName = placemark.locality!
-                }
             }
         }
     }

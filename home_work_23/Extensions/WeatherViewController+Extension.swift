@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -30,9 +31,9 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
                 guard let nameCity = nameCity, let temp = temp, let clouds = currentClouds, let maxTemp = dailyMaxTempArray.max(), let minTemp = dailyMaxTempArray.min() else {return cell}
                 cell.layer.backgroundColor = UIColor.clear.cgColor
                 cell.backgroundColor = .clear
-                    cell.nameCity.text = nameCity
-                    cell.currentTemp.text = "\(Int(temp))°"
-                    cell.currentClouds.text = clouds
+                cell.nameCity.text = nameCity
+                cell.currentTemp.text = "\(Int(temp))°"
+                cell.currentClouds.text = clouds
                 cell.currentMaxMinTemp.text = "Min: \(Int(minTemp))°, Max: \(Int(maxTemp))°"
                 return cell
             }
@@ -45,7 +46,7 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.dtArray = hourlyArrayDt
                 cell.imageArray = hourlyArrayImage
                 cell.collectionView.reloadData()
-               return cell
+                return cell
             }
         default:
             if let cell = tableView.dequeueReusableCell(withIdentifier: DailyWeatherCell.key) as? DailyWeatherCell {
@@ -77,5 +78,35 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         30
+    }
+}
+// MARK: CLLocation
+extension WeatherViewController: CLLocationManagerDelegate {
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        if manager.authorizationStatus == .authorizedAlways || manager.authorizationStatus == .authorizedWhenInUse {
+            coreManager.startUpdatingLocation()
+            
+        } else if manager.authorizationStatus == .restricted || manager.authorizationStatus == .denied || manager.authorizationStatus == .notDetermined {
+            locationButton.isEnabled = false
+        }
+        
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        guard let location = locations.first else {return}
+        self.currentCoordinate = location.coordinate
+        
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+            if let error = error {
+                print("Unable to Reverse Geocode Location (\(error))")
+            } else {
+                if let placemarks = placemarks, let placemark = placemarks.first {
+                    self.currentName = placemark.locality!
+                }
+            }
+        }
     }
 }

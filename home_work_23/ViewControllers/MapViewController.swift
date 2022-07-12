@@ -12,6 +12,10 @@ import CoreLocation
 class MapViewController: UIViewController {
     private var apiProvider: RestAPIProviderProtocol!
     private var provaider: RealmProviderProtocol!
+    var mapView: GMSMapView?
+    var imageWeather: UIImage!
+    var temp: Int!
+    var speedWind: Double!
     override func viewDidLoad() {
         super.viewDidLoad()
         provaider = RealmProvader()
@@ -22,7 +26,11 @@ class MapViewController: UIViewController {
             longitude: 27.597,
             zoom: 10
         )
-        let mapView = GMSMapView.map(withFrame: .zero, camera: camera)
+        mapView = GMSMapView.map(withFrame: .zero, camera: camera)
+        guard var mapView = mapView else {
+            return
+        }
+
         mapView.delegate = self
         view = mapView
     }
@@ -32,14 +40,36 @@ class MapViewController: UIViewController {
             guard let self = self else {return}
             switch result {
             case .success(let value):
-                guard let current = value.current, let temp = current.temp, let lat = value.lat, let lon = value.lon, let weather = current.weather, let weatherDescription = weather.first?.description else {return}
+                guard let current = value.current, let temp = current.temp, let lat = value.lat, let lon = value.lon, let weather = current.weather, let weatherDescription = weather.first?.description, let icon = weather.first?.icon, let speed = current.windSpeed else {return}
                 let data = Int(Date().timeIntervalSince1970)
                 self.provaider.setCurrentWeatherQueryList(temp: temp, weather: weatherDescription, time: data)
                 self.provaider.setQueryList(lat: lat, lon: lon, time: data)
-                let alert = UIAlertController(title: "Температура:", message: temp.description, preferredStyle: .alert)
-                let okButton = UIAlertAction(title: "OK", style: .cancel)
-                alert.addAction(okButton)
-                self.present(alert, animated: true)
+                self.temp = Int(temp)
+
+                if let url = URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png") {
+                    do {
+                        let data = try Data(contentsOf: url)
+                        self.imageWeather = UIImage(data: data)
+                    } catch _ {
+                        print("error")
+                    }
+                }
+                self.speedWind = speed
+                let position = CLLocationCoordinate2D(latitude: coord.latitude, longitude: coord.longitude)
+                let marker = GMSMarker(position: position)
+                marker.title = "Hello World"
+                marker.snippet = temp.description
+            
+                
+                //marker.icon = UIImage(systemName: "circle")
+               // marker.iconView = UIImageView(image: UIImage(systemName: "circle"))
+               // marker.infoWindowAnchor = CGPoint(x: 0.5, y: 0.5)
+               // marker.icon = UIImage(systemName: "circle")
+                guard var mapView = self.mapView else {
+                    return
+                }
+                marker.map = mapView
+                mapView.selectedMarker = marker
             case .failure(let error):
                 print(error)
             }
