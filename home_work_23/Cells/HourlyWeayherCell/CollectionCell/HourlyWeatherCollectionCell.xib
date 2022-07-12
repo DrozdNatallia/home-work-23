@@ -72,7 +72,7 @@
                 <outlet property="imageWeayherView" destination="FkJ-qg-ddh" id="0m4-P7-zS2"/>
                 <outlet property="temp" destination="cCb-tJ-sFd" id="Diw-bx-g0j"/>
             </connections>
-            <point key="canvasLocation" x="162.31884057971016" y="90.736607142857139"/>
+            <point key="canvasLocation" x="162.31884057971016" y="90.401785714285708"/>
         </collectionViewCell>
     </objects>
 </document>

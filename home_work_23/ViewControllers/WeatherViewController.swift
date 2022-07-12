@@ -11,7 +11,7 @@ import RealmSwift
 import GoogleMaps
 import CoreLocation
 
-class WeatherViewController: UIViewController{
+class WeatherViewController: UIViewController {
     
     private lazy var coreManager: CLLocationManager = {
         let manager = CLLocationManager()
@@ -66,6 +66,31 @@ class WeatherViewController: UIViewController{
     
     var currentCoordinate: CLLocationCoordinate2D!
     var currentName: String!
+    var newNameCity: UITextField!
+    
+    
+    enum ModeType {
+        case navigation
+        case selectionCity
+        
+    }
+    
+    var selectionMode: ModeType = .navigation {
+        didSet {
+            locationButton.isSelected = selectionMode == .navigation
+            if locationButton.isSelected {
+                locationButton.tintColor = .red
+            } else {
+                locationButton.tintColor = .white
+            }
+            searchPlaceButton.isSelected = selectionMode == .selectionCity
+            if searchPlaceButton.isSelected {
+                searchPlaceButton.tintColor = .red
+            } else {
+                searchPlaceButton.tintColor = .white
+            }
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         let realm = try! Realm()
@@ -107,32 +132,70 @@ class WeatherViewController: UIViewController{
         refreshControl.endRefreshing()
     }
     
+  // MARK: get location weather
     @IBAction func onLocationButton(_ sender: Any) {
-        
+        selectionMode = .navigation
         coreManager.requestWhenInUseAuthorization()
+        guard currentCoordinate != nil else {
+            return
+        }
         self.blurEffectView.isHidden = false
         self.activityIndicator.startAnimating()
         self.nameCity = currentName
-        self.getWeatherByCoordinates(cityLat: Double(currentCoordinate.latitude), cityLon: Double(currentCoordinate.longitude))   
+        
+        self.getWeatherByCoordinates(cityLat: Double(currentCoordinate.latitude), cityLon: Double(currentCoordinate.longitude))
     }
     
-    
-    
+ // MARK: Search Button
+    @IBAction func onSearchButton(_ sender: Any) {
+        selectionMode = .selectionCity
+        let alert = UIAlertController(title: "Enter the name of the city", message: nil, preferredStyle: .alert)
+
+        alert.addTextField { textField in
+            textField.placeholder = "Enter name"
+            self.newNameCity = textField
+        }
+
+        let okButton = UIAlertAction(title: "Ok", style: .default) { [weak self] _ in
+            guard let self = self else {return}
+            guard let newName = self.newNameCity.text else {return}
+
+            self.nameCity = newName
+            self.blurEffectView.isHidden = false
+            self.activityIndicator.startAnimating()
+            self.getCoordinatesByName()
+        }
+        let cancelButton = UIAlertAction(title: "Cancel", style: .destructive)
+        alert.addAction(okButton)
+        alert.addAction(cancelButton)
+        present(alert, animated: true)
+
+    }
     
     fileprivate func getCoordinatesByName() {
-        guard let nameCity = nameCity else {return}
+        guard var nameCity = nameCity else {return}
         apiProvider.getCoordinatesByName(name: nameCity) { [weak self] result in
             guard let self = self else {return}
             switch result {
             case .success(let value):
                 if let city = value.first {
-                    self.nameCity = city.name
+                    nameCity = city.name
                     self.getWeatherByCoordinates(cityLat: city.lat, cityLon: city.lon)
+                } else {
+                    self.blurEffectView.isHidden = true
+                    self.activityIndicator.stopAnimating()
+                    let errorAlert = UIAlertController(title: "Place not found", message: nil, preferredStyle: .alert)
+                    let okButton = UIAlertAction(title: "Ok", style: .cancel) { _ in
+                    }
+                    errorAlert.addAction(okButton)
+                    self.present(errorAlert, animated: true)
                 }
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
+        
+        
     }
     
     private func setWeatherNotifications(arrayTime: [Int]) {
@@ -175,6 +238,10 @@ class WeatherViewController: UIViewController{
                 let snow = 600...699
                 let rain = 500...599
                 let thunderstorm = 200...299
+                self.hourlyArrayImage.removeAll()
+                self.hourlyArrayDt.removeAll()
+                self.hourlyArrayTemp.removeAll()
+                self.hourlyArrayBadWeatherId.removeAll()
                 for item in hourly {
                     guard let hourlyTemp = item.temp, let hourlyDt = item.dt, let weather = item.weather, let icon = weather.first?.icon, let weatherId = weather.first?.id else {return}
                     if let url = URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png") {
@@ -190,6 +257,7 @@ class WeatherViewController: UIViewController{
                     self.hourlyArrayBadWeatherId.append(weatherId)
                     
                     if snow.contains(weatherId) || rain.contains(weatherId) || thunderstorm.contains(weatherId) {
+                        self.hourlyArrayBadWeatherDt.removeAll()
                         self.hourlyArrayBadWeatherDt.append(hourlyDt - 60 * 30)
                     }
                 }
@@ -197,6 +265,10 @@ class WeatherViewController: UIViewController{
                 
                 // MARK: DAILY
                 guard let daily = value.daily else {return }
+                self.dailyImageArray.removeAll()
+                self.dailyMaxTempArray.removeAll()
+                self.dailyArrayMinTemp.removeAll()
+                self.dailyArrayDt.removeAll()
                 
                 for item in daily {
                     guard let temp = item.temp, let maxTemp = temp.max, let minTemp = temp.min, let days = item.dt, let weather = item.weather, let icon = weather.first?.icon else {return}
@@ -234,11 +306,15 @@ extension WeatherViewController: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         if manager.authorizationStatus == .authorizedAlways || manager.authorizationStatus == .authorizedWhenInUse {
             coreManager.startUpdatingLocation()
+            
+        } else if manager.authorizationStatus == .restricted || manager.authorizationStatus == .denied || manager.authorizationStatus == .notDetermined {
+            locationButton.isEnabled = false
         }
+
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
+
        guard let location = locations.first else {return}
         self.currentCoordinate = location.coordinate
         
@@ -252,9 +328,5 @@ extension WeatherViewController: CLLocationManagerDelegate {
                 }
             }
         }
-        
     }
-    
-    
-
 }
