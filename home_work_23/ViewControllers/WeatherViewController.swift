@@ -50,7 +50,7 @@ class WeatherViewController: UIViewController {
     var currentName: String!
     var newNameCity: UITextField!
     var defaults = UserDefaults()
-    var selectionMode: ModeType = .navigation {
+    var selectionMode: ModeType = .none {
         didSet {
             locationButton.isSelected = selectionMode == .navigation
             if locationButton.isSelected {
@@ -75,6 +75,7 @@ class WeatherViewController: UIViewController {
             realm.deleteAll()
         }
         coreManager.delegate = self
+        coreManager.requestWhenInUseAuthorization()
         view.backgroundColor = UIColor(patternImage: UIImage(named: "e6d438f7bc89107d163f0db9f1e1f601.jpeg")!)
         
         blurEffectView.isHidden = false
@@ -121,6 +122,8 @@ class WeatherViewController: UIViewController {
     
     
     func getWeatherByLocation() {
+        
+        guard currentCoordinate != nil else {return}
         self.blurEffectView.isHidden = false
         self.activityIndicator.startAnimating()
         self.nameCity = currentName
@@ -134,7 +137,6 @@ class WeatherViewController: UIViewController {
         selectionMode = .navigation
         coreManager.requestWhenInUseAuthorization()
         getWeatherByLocation()
-        
     }
     
     // MARK: Search City
@@ -186,8 +188,6 @@ class WeatherViewController: UIViewController {
                 print(error.localizedDescription)
             }
         }
-        
-        
     }
     // MARK: Notifications
     private func setWeatherNotifications(arrayTime: [Int]) {

@@ -87,8 +87,8 @@ extension WeatherViewController: CLLocationManagerDelegate {
         if manager.authorizationStatus == .authorizedAlways || manager.authorizationStatus == .authorizedWhenInUse {
             coreManager.startUpdatingLocation()
             
-        } else if manager.authorizationStatus == .restricted || manager.authorizationStatus == .denied || manager.authorizationStatus == .notDetermined {
-          //  locationButton.isEnabled = false
+        } else if manager.authorizationStatus == .restricted || manager.authorizationStatus == .denied {
+            locationButton.isEnabled = false
         }
     }
     
@@ -97,18 +97,23 @@ extension WeatherViewController: CLLocationManagerDelegate {
         self.currentCoordinate = userLocation.coordinate
         
         let geocoder = CLGeocoder()
-        
-        if selectionMode == .navigation {
-            geocoder.reverseGeocodeLocation(userLocation) { (placemarks, error) in
+        geocoder.reverseGeocodeLocation(userLocation) { [self] (placemarks, error) in
                 if let error = error {
                     print("Unable to Reverse Geocode Location (\(error))")
                 } else {
                     if let placemarks = placemarks, let placemark = placemarks.first, let locality = placemark.locality {
                         self.currentName = locality
+                        if self.selectionMode == .navigation {
                         self.nameCity = self.currentName
+                        }
                     }
                 }
             }
+        
+        
+        
+        
+        if selectionMode == .navigation {
             getWeatherByLocation()
         }
         
