@@ -27,7 +27,7 @@ class MapViewController: UIViewController {
             zoom: 10
         )
         mapView = GMSMapView.map(withFrame: .zero, camera: camera)
-        guard var mapView = mapView else {
+        guard let mapView = mapView else {
             return
         }
 
@@ -57,15 +57,7 @@ class MapViewController: UIViewController {
                 self.speedWind = speed
                 let position = CLLocationCoordinate2D(latitude: coord.latitude, longitude: coord.longitude)
                 let marker = GMSMarker(position: position)
-                marker.title = "Hello World"
-                marker.snippet = temp.description
-            
-                
-                //marker.icon = UIImage(systemName: "circle")
-               // marker.iconView = UIImageView(image: UIImage(systemName: "circle"))
-               // marker.infoWindowAnchor = CGPoint(x: 0.5, y: 0.5)
-               // marker.icon = UIImage(systemName: "circle")
-                guard var mapView = self.mapView else {
+                guard let mapView = self.mapView else {
                     return
                 }
                 marker.map = mapView

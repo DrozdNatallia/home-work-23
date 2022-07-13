@@ -49,18 +49,20 @@ class WeatherViewController: UIViewController {
     var currentCoordinate: CLLocationCoordinate2D!
     var currentName: String!
     var newNameCity: UITextField!
-    
+    var defaults = UserDefaults()
     var selectionMode: ModeType = .navigation {
         didSet {
             locationButton.isSelected = selectionMode == .navigation
             if locationButton.isSelected {
                 locationButton.tintColor = .red
+                UserDefaults.standard.set(true, forKey: "isNavigation")
             } else {
                 locationButton.tintColor = .white
             }
             searchPlaceButton.isSelected = selectionMode == .selectionCity
             if searchPlaceButton.isSelected {
                 searchPlaceButton.tintColor = .red
+                UserDefaults.standard.set(false, forKey: "isNavigation")
             } else {
                 searchPlaceButton.tintColor = .white
             }
@@ -96,7 +98,17 @@ class WeatherViewController: UIViewController {
         
         provaider = RealmProvader()
         apiProvider = AlamofireProvaider()
-        getCoordinatesByName()
+
+        if !isAppAlreadyLaunchedOnce(){
+            getCoordinatesByName()
+        } else if defaults.bool(forKey: "isNavigation") {
+                selectionMode = .navigation
+        } else {
+                selectionMode = .selectionCity
+                nameCity = defaults.string(forKey: "city")
+                getCoordinatesByName()
+            }
+        
     }
     
     // MARK: Refresh tableView
@@ -107,18 +119,22 @@ class WeatherViewController: UIViewController {
         refreshControl.endRefreshing()
     }
     
+    
+    func getWeatherByLocation() {
+        self.blurEffectView.isHidden = false
+        self.activityIndicator.startAnimating()
+        self.nameCity = currentName
+        self.getWeatherByCoordinates(cityLat: Double(currentCoordinate.latitude), cityLon: Double(currentCoordinate.longitude))
+    }
+
+    
+    
     // MARK: Location weather
     @IBAction func onLocationButton(_ sender: Any) {
         selectionMode = .navigation
         coreManager.requestWhenInUseAuthorization()
-        guard currentCoordinate != nil else {
-            return
-        }
-        self.blurEffectView.isHidden = false
-        self.activityIndicator.startAnimating()
-        self.nameCity = currentName
+        getWeatherByLocation()
         
-        self.getWeatherByCoordinates(cityLat: Double(currentCoordinate.latitude), cityLon: Double(currentCoordinate.longitude))
     }
     
     // MARK: Search City
@@ -134,7 +150,7 @@ class WeatherViewController: UIViewController {
         let okButton = UIAlertAction(title: "Ok", style: .default) { [weak self] _ in
             guard let self = self else {return}
             guard let newName = self.newNameCity.text else {return}
-            
+            UserDefaults.standard.set(newName, forKey: "city")
             self.nameCity = newName
             self.blurEffectView.isHidden = false
             self.activityIndicator.startAnimating()
@@ -264,4 +280,16 @@ class WeatherViewController: UIViewController {
             }
         }
     }
+    
+    
+    func isAppAlreadyLaunchedOnce() -> Bool {
+        let defaults = UserDefaults.standard
+        if let _ = defaults.string(forKey: "isAppAlreadyLaunchedOnce") {
+            return true
+        } else {
+            defaults.set(true, forKey: "isAppAlreadyLaunchedOnce")
+            return false
+        }
+    }
+    
 }

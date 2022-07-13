@@ -12,6 +12,7 @@ import UIKit
 enum ModeType {
     case navigation
     case selectionCity
+    case none
     
 }
 

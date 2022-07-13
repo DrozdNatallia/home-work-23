@@ -82,31 +82,35 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
 }
 // MARK: CLLocation
 extension WeatherViewController: CLLocationManagerDelegate {
-    
+   
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         if manager.authorizationStatus == .authorizedAlways || manager.authorizationStatus == .authorizedWhenInUse {
             coreManager.startUpdatingLocation()
             
         } else if manager.authorizationStatus == .restricted || manager.authorizationStatus == .denied || manager.authorizationStatus == .notDetermined {
-            locationButton.isEnabled = false
+          //  locationButton.isEnabled = false
         }
-        
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        guard let location = locations.first else {return}
-        self.currentCoordinate = location.coordinate
+        let userLocation = locations.last! as CLLocation
+        self.currentCoordinate = userLocation.coordinate
         
         let geocoder = CLGeocoder()
-        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
-            if let error = error {
-                print("Unable to Reverse Geocode Location (\(error))")
-            } else {
-                if let placemarks = placemarks, let placemark = placemarks.first {
-                    self.currentName = placemark.locality!
+        
+        if selectionMode == .navigation {
+            geocoder.reverseGeocodeLocation(userLocation) { (placemarks, error) in
+                if let error = error {
+                    print("Unable to Reverse Geocode Location (\(error))")
+                } else {
+                    if let placemarks = placemarks, let placemark = placemarks.first, let locality = placemark.locality {
+                        self.currentName = locality
+                        self.nameCity = self.currentName
+                    }
                 }
             }
+            getWeatherByLocation()
         }
+        
     }
 }
