@@ -95,7 +95,6 @@ extension WeatherViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation = locations.last! as CLLocation
         self.currentCoordinate = userLocation.coordinate
-        
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(userLocation) { [self] (placemarks, error) in
                 if let error = error {
@@ -110,9 +109,7 @@ extension WeatherViewController: CLLocationManagerDelegate {
                 }
             }
         
-        
-        
-        
+        coreManager.stopUpdatingLocation()
         if selectionMode == .navigation {
             getWeatherByLocation()
         }

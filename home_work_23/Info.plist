@@ -2,12 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>App asks for permission to access geolocation</string>
+	<key>API_KEY</key>
+	<string>7ae4e76f390ca3f4cb178b04715e3287</string>
 	<key>Api_Key_Map</key>
 	<string>AIzaSyBNw-q-aqt4TiutfXtY3z9-mNuAy6hpxOw</string>
-	<key>API_KEY</key>
-	<string>3b0d514cd0fcc25c0056ef824e4464ad</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
