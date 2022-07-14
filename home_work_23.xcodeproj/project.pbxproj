@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		A80A51B2D6AE4A05D3E092F1 /* Pods_home_work_23.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F0F180ACDD77A75F4B010EF /* Pods_home_work_23.framework */; };
 		CC0F05CC2868815200A33DE0 /* WeatherViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F05CB2868815200A33DE0 /* WeatherViewController+Extension.swift */; };
+		CC27E364287DF8A900720830 /* ModeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC27E363287DF8A900720830 /* ModeType.swift */; };
+		CC27E366287DF93200720830 /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC27E365287DF93200720830 /* ContentType.swift */; };
 		CC304850286365EF004DF315 /* InfoCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC30484F286365EF004DF315 /* InfoCity.swift */; };
 		CC30485328638340004DF315 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CC30485228638340004DF315 /* Alamofire */; };
 		CC3064F0286CD24C00F66636 /* RealmListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3064EF286CD24C00F66636 /* RealmListController.swift */; };
@@ -23,6 +25,8 @@
 		CC54D5B5285F3846005A4942 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC54D5B3285F3846005A4942 /* LaunchScreen.storyboard */; };
 		CC54D5BD285F4B26005A4942 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC54D5BC285F4B26005A4942 /* WeatherData.swift */; };
 		CC5BEC5428675E1700A0237C /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5BEC5328675E1700A0237C /* MapViewController.swift */; };
+		CC6C6B32287DDABC004A1DBD /* InfoWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC6C6B31287DDABC004A1DBD /* InfoWindow.xib */; };
+		CC6C6B34287DDD67004A1DBD /* CustomInfoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6C6B33287DDD67004A1DBD /* CustomInfoWindow.swift */; };
 		CC8A47522867250200C427B3 /* HourlyWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8A47512867250200C427B3 /* HourlyWeatherData.swift */; };
 		CC8A47542867252100C427B3 /* DailyWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8A47532867252100C427B3 /* DailyWeatherData.swift */; };
 		CC8A47562867286400C427B3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8A47552867286400C427B3 /* Constants.swift */; };
@@ -53,6 +57,8 @@
 		574E34DB2A4E3A9B2AD5046F /* Pods-home_work_23.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-home_work_23.debug.xcconfig"; path = "Target Support Files/Pods-home_work_23/Pods-home_work_23.debug.xcconfig"; sourceTree = "<group>"; };
 		5F0F180ACDD77A75F4B010EF /* Pods_home_work_23.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_home_work_23.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC0F05CB2868815200A33DE0 /* WeatherViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherViewController+Extension.swift"; sourceTree = "<group>"; };
+		CC27E363287DF8A900720830 /* ModeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeType.swift; sourceTree = "<group>"; };
+		CC27E365287DF93200720830 /* ContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentType.swift; sourceTree = "<group>"; };
 		CC30484F286365EF004DF315 /* InfoCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCity.swift; sourceTree = "<group>"; };
 		CC3064EF286CD24C00F66636 /* RealmListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmListController.swift; sourceTree = "<group>"; };
 		CC3064F1286CED1B00F66636 /* ListRequestTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRequestTableCell.swift; sourceTree = "<group>"; };
@@ -68,6 +74,8 @@
 		CC54D5B6285F3846005A4942 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC54D5BC285F4B26005A4942 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		CC5BEC5328675E1700A0237C /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		CC6C6B31287DDABC004A1DBD /* InfoWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoWindow.xib; sourceTree = "<group>"; };
+		CC6C6B33287DDD67004A1DBD /* CustomInfoWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInfoWindow.swift; sourceTree = "<group>"; };
 		CC8A47512867250200C427B3 /* HourlyWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeatherData.swift; sourceTree = "<group>"; };
 		CC8A47532867252100C427B3 /* DailyWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherData.swift; sourceTree = "<group>"; };
 		CC8A47552867286400C427B3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -134,14 +142,25 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		CC27E367287DFA3A00720830 /* CustomInfoWindow */ = {
+			isa = PBXGroup;
+			children = (
+				CC6C6B33287DDD67004A1DBD /* CustomInfoWindow.swift */,
+				CC6C6B31287DDABC004A1DBD /* InfoWindow.xib */,
+			);
+			path = CustomInfoWindow;
+			sourceTree = "<group>";
+		};
 		CC3048542863B212004DF315 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CC27E365287DF93200720830 /* ContentType.swift */,
 				CCDD00D8286CFDEA00CE8582 /* FormattedType.swift */,
 				CC30484F286365EF004DF315 /* InfoCity.swift */,
 				CC54D5BC285F4B26005A4942 /* WeatherData.swift */,
 				CC8A47512867250200C427B3 /* HourlyWeatherData.swift */,
 				CC8A47532867252100C427B3 /* DailyWeatherData.swift */,
+				CC27E363287DF8A900720830 /* ModeType.swift */,
 				CCDD00E3286D050E00CE8582 /* RealmModels */,
 			);
 			path = Models;
@@ -185,14 +204,14 @@
 				CC8A475B286756EE00C427B3 /* ViewControllers */,
 				CC8A475D2867572200C427B3 /* Services */,
 				CC8A475C286756FF00C427B3 /* Protocols */,
-				CC8A47552867286400C427B3 /* Constants.swift */,
 				CC471717286875E500122832 /* Extensions */,
 				CC3048542863B212004DF315 /* Models */,
-				CC54D5AE285F3844005A4942 /* Main.storyboard */,
+				CC27E367287DFA3A00720830 /* CustomInfoWindow */,
 				CC0F05D12868E35100A33DE0 /* Cells */,
-				CC54D5B1285F3846005A4942 /* Assets.xcassets */,
+				CC54D5AE285F3844005A4942 /* Main.storyboard */,
 				CC54D5B3285F3846005A4942 /* LaunchScreen.storyboard */,
 				CC54D5B6285F3846005A4942 /* Info.plist */,
+				CC54D5B1285F3846005A4942 /* Assets.xcassets */,
 			);
 			path = home_work_23;
 			sourceTree = "<group>";
@@ -219,6 +238,7 @@
 		CC8A475D2867572200C427B3 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				CC8A47552867286400C427B3 /* Constants.swift */,
 				CC8A475728672B1000C427B3 /* AlamofireProvaider.swift */,
 				CCD72146286DB63B0043B636 /* RealmProvaider.swift */,
 			);
@@ -354,6 +374,7 @@
 				CCCEA630286B13B600E5CB0C /* HourlyWeatherCell.xib in Resources */,
 				CC54D5B2285F3846005A4942 /* Assets.xcassets in Resources */,
 				CCA8EC5E286B02B4008DCF9E /* CurrentWeatherCell.xib in Resources */,
+				CC6C6B32287DDABC004A1DBD /* InfoWindow.xib in Resources */,
 				CCCEA638286B428C00E5CB0C /* DailyWeatherCell.xib in Resources */,
 				CC3064F4286CED1B00F66636 /* ListRequestTableCell.xib in Resources */,
 				CC54D5B0285F3844005A4942 /* Main.storyboard in Resources */,
@@ -414,6 +435,7 @@
 				CCDD00DF286D021200CE8582 /* HourlyWeatherCell+Extension.swift in Sources */,
 				CCCEA633286B154B00E5CB0C /* HourlyWeatherCollectionCell.swift in Sources */,
 				CCCEA62F286B13B600E5CB0C /* HourlyWeatherCell.swift in Sources */,
+				CC27E366287DF93200720830 /* ContentType.swift in Sources */,
 				CC54D5BD285F4B26005A4942 /* WeatherData.swift in Sources */,
 				CC0F05CC2868815200A33DE0 /* WeatherViewController+Extension.swift in Sources */,
 				CC54D5AD285F3844005A4942 /* WeatherViewController.swift in Sources */,
@@ -429,10 +451,12 @@
 				CC8A475828672B1000C427B3 /* AlamofireProvaider.swift in Sources */,
 				CCD72149286DC2D10043B636 /* Int+Extension.swift in Sources */,
 				CCA8EC5D286B02B4008DCF9E /* CurrentWeatherCell.swift in Sources */,
+				CC27E364287DF8A900720830 /* ModeType.swift in Sources */,
 				CC8A47542867252100C427B3 /* DailyWeatherData.swift in Sources */,
 				CC8A47522867250200C427B3 /* HourlyWeatherData.swift in Sources */,
 				CC3064F0286CD24C00F66636 /* RealmListController.swift in Sources */,
 				CCD72147286DB63B0043B636 /* RealmProvaider.swift in Sources */,
+				CC6C6B34287DDD67004A1DBD /* CustomInfoWindow.swift in Sources */,
 				CCDD00DD286D01C200CE8582 /* RealmListController+Extension.swift in Sources */,
 				CC8A47562867286400C427B3 /* Constants.swift in Sources */,
 				CCDD00D9286CFDEA00CE8582 /* FormattedType.swift in Sources */,
@@ -581,10 +605,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G6WVNFWBQ8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = home_work_23/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App asks for permission to access geolocation";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -595,8 +622,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.TMSi32.home-work-23";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.TMSi32.home-work-23.myApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -609,10 +637,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G6WVNFWBQ8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = home_work_23/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App asks for permission to access geolocation";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -623,8 +654,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.TMSi32.home-work-23";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.TMSi32.home-work-23.myApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

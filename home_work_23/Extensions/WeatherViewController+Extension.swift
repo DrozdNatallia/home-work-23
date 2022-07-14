@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -28,23 +29,30 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
         case .current:
             if let cell = tableView.dequeueReusableCell(withIdentifier: CurrentWeatherCell.key) as? CurrentWeatherCell {
                 guard let nameCity = nameCity, let temp = temp, let clouds = currentClouds, let maxTemp = dailyMaxTempArray.max(), let minTemp = dailyMaxTempArray.min() else {return cell}
-                    cell.nameCity.text = nameCity
-                    cell.currentTemp.text = "\(Int(temp))°"
-                    cell.currentClouds.text = clouds
+                cell.layer.backgroundColor = UIColor.clear.cgColor
+                cell.backgroundColor = .clear
+                cell.nameCity.text = nameCity
+                cell.currentTemp.text = "\(Int(temp))°"
+                cell.currentClouds.text = clouds
                 cell.currentMaxMinTemp.text = "Min: \(Int(minTemp))°, Max: \(Int(maxTemp))°"
                 return cell
             }
         case .hourly:
             
             if let cell = tableView.dequeueReusableCell(withIdentifier: "HourlyWeatherCell", for: indexPath) as? HourlyWeatherCell {
+                cell.layer.backgroundColor = UIColor.clear.cgColor
+                cell.backgroundColor = .clear
                 cell.tempArray = hourlyArrayTemp
                 cell.dtArray = hourlyArrayDt
                 cell.imageArray = hourlyArrayImage
                 cell.collectionView.reloadData()
-               return cell
+                return cell
             }
         default:
             if let cell = tableView.dequeueReusableCell(withIdentifier: DailyWeatherCell.key) as? DailyWeatherCell {
+                cell.contentView.backgroundColor = UIColor.clear
+                cell.layer.backgroundColor = UIColor.clear.cgColor
+                cell.backgroundColor = .clear
                 cell.days.text = "\(dailyArrayDt[indexPath.row])"
                 cell.minTemp.text = "Min: \(Int(dailyArrayMinTemp[indexPath.row]))°"
                 cell.maxTemp.text = "Max: \(Int(dailyMaxTempArray[indexPath.row]))°"
@@ -70,5 +78,41 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         30
+    }
+}
+// MARK: CLLocation
+extension WeatherViewController: CLLocationManagerDelegate {
+   
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        if manager.authorizationStatus == .authorizedAlways || manager.authorizationStatus == .authorizedWhenInUse {
+            coreManager.startUpdatingLocation()
+            
+        } else if manager.authorizationStatus == .restricted || manager.authorizationStatus == .denied {
+            locationButton.isEnabled = false
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation = locations.last! as CLLocation
+        self.currentCoordinate = userLocation.coordinate
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(userLocation) { [self] (placemarks, error) in
+                if let error = error {
+                    print("Unable to Reverse Geocode Location (\(error))")
+                } else {
+                    if let placemarks = placemarks, let placemark = placemarks.first, let locality = placemark.locality {
+                        self.currentName = locality
+                        if self.selectionMode == .navigation {
+                        self.nameCity = self.currentName
+                        }
+                    }
+                }
+            }
+        
+        coreManager.stopUpdatingLocation()
+        if selectionMode == .navigation {
+            getWeatherByLocation()
+        }
+        
     }
 }

@@ -71,7 +71,6 @@
                         </constraints>
                     </stackView>
                 </subviews>
-                <color key="backgroundColor" red="0.417776123" green="0.63737708910000002" blue="0.76859849690000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="S0O-IS-diP" secondAttribute="trailing" constant="10" id="ACo-5b-C1g"/>
                     <constraint firstAttribute="bottom" secondItem="S0O-IS-diP" secondAttribute="bottom" id="P1x-A7-jbg"/>
