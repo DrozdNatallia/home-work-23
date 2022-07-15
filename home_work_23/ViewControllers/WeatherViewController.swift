@@ -147,6 +147,7 @@ class WeatherViewController: UIViewController {
         let alert = UIAlertController(title: "Enter the name of the city", message: nil, preferredStyle: .alert)
         
         alert.addTextField { textField in
+            textField.delegate = self
             textField.placeholder = "Enter name"
             self.newNameCity = textField
         }
