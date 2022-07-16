@@ -7,6 +7,7 @@
 
 import UIKit
 import GoogleMaps
+import RealmSwift
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -21,6 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("User has declined notifications")
             }
         }
+        
+        let config = Realm.Configuration(schemaVersion: 2)
+        Realm.Configuration.defaultConfiguration = config
+        let _ = try! Realm()
+        
         return true
     }
 

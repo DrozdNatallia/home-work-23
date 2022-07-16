@@ -23,7 +23,8 @@ extension RealmListController: UITableViewDelegate, UITableViewDataSource {
             cell.latitude.text = info.latitude.description
             cell.time.text = info.time.convertUnix(formattedType: .fullTime)
             cell.temp.text = currentWeather.temp.description
-            cell.weatherDescription.text = currentWeather.weatherDescription
+            cell.weatherDescription.text = NSLocalizedString(currentWeather.weatherDescription, comment: "")
+            cell.isCurrentWeather.text = NSLocalizedString(currentWeather.isCurrentWeather.description, comment: "")
             return cell
         }
         return UITableViewCell()

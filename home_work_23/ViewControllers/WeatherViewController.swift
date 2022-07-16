@@ -91,7 +91,7 @@ class WeatherViewController: UIViewController {
         
         refreshControl = UIRefreshControl()
         tableView.refreshControl = refreshControl
-        refreshControl.attributedTitle = NSAttributedString(string: "Refreshing", attributes: [.foregroundColor: UIColor.white])
+        refreshControl.attributedTitle = NSAttributedString(string: NSLocalizedString("Refreshing", comment: ""), attributes: [.foregroundColor: UIColor.white])
         refreshControl.tintColor = .white
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         
@@ -144,15 +144,15 @@ class WeatherViewController: UIViewController {
     @IBAction func onSearchButton(_ sender: Any) {
         UserDefaults.standard.set(true, forKey: "isNone")
         selectionMode = .selectionCity
-        let alert = UIAlertController(title: "Enter the name of the city", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: NSLocalizedString("Enter the name of the city", comment: ""), message: nil, preferredStyle: .alert)
         
         alert.addTextField { textField in
             textField.delegate = self
-            textField.placeholder = "Enter name"
+            textField.placeholder = NSLocalizedString("Enter name", comment: "")
             self.newNameCity = textField
         }
         
-        let okButton = UIAlertAction(title: "Ok", style: .default) { [weak self] _ in
+        let okButton = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { [weak self] _ in
             guard let self = self else {return}
             guard let newName = self.newNameCity.text else {return}
             UserDefaults.standard.set(newName, forKey: "city")
@@ -161,7 +161,7 @@ class WeatherViewController: UIViewController {
             self.activityIndicator.startAnimating()
             self.getCoordinatesByName()
         }
-        let cancelButton = UIAlertAction(title: "Cancel", style: .destructive)
+        let cancelButton = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive)
         alert.addAction(okButton)
         alert.addAction(cancelButton)
         present(alert, animated: true)
@@ -181,8 +181,8 @@ class WeatherViewController: UIViewController {
                 } else {
                     self.blurEffectView.isHidden = true
                     self.activityIndicator.stopAnimating()
-                    let errorAlert = UIAlertController(title: "Place not found", message: nil, preferredStyle: .alert)
-                    let okButton = UIAlertAction(title: "Ok", style: .cancel) { _ in
+                    let errorAlert = UIAlertController(title: NSLocalizedString("Place not found", comment: ""), message: nil, preferredStyle: .alert)
+                    let okButton = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .cancel) { _ in
                     }
                     errorAlert.addAction(okButton)
                     self.present(errorAlert, animated: true)
@@ -221,7 +221,7 @@ class WeatherViewController: UIViewController {
                 self.temp = temp
                 self.currentClouds = clouds
                 let date = Int(Date().timeIntervalSince1970)
-                self.provaider.setCurrentWeatherQueryList(temp: temp, weather: clouds, time: date)
+                self.provaider.setCurrentWeatherQueryList(temp: temp, weather: clouds, time: date, isCurrentWeather: true)
                 self.provaider.setQueryList(lat: lat, lon: lon, time: date)
                 
                 // MARK: Hourly

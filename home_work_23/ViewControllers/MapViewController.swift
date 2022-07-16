@@ -42,7 +42,7 @@ class MapViewController: UIViewController {
             case .success(let value):
                 guard let current = value.current, let temp = current.temp, let lat = value.lat, let lon = value.lon, let weather = current.weather, let weatherDescription = weather.first?.description, let icon = weather.first?.icon, let speed = current.windSpeed else {return}
                 let data = Int(Date().timeIntervalSince1970)
-                self.provaider.setCurrentWeatherQueryList(temp: temp, weather: weatherDescription, time: data)
+                self.provaider.setCurrentWeatherQueryList(temp: temp, weather: weatherDescription, time: data, isCurrentWeather: false)
                 self.provaider.setQueryList(lat: lat, lon: lon, time: data)
                 self.temp = Int(temp)
 

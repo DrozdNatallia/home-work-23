@@ -13,7 +13,7 @@
 "light thunderstorm" = "легкая гроза";
 "thunderstorm" = "гроза";
 "heavy thunderstorm" = "сильная гроза";
-"ragged thunderstorm" = "рваная гроза";
+"ragged thunderstorm" = "неровная гроза";
 "thunderstorm with light drizzle" = "гроза с мелким моросящим дождем";
 "thunderstorm with drizzle" = "гроза с моросью";
 "thunderstorm with heavy drizzle" = "гроза с сильным моросящим дождем";
@@ -27,7 +27,7 @@
 "light intensity shower rain" = "слабый ливневый дождь";
 "shower rain" = "ливневый дождь";
 "heavy intensity shower rain" = "сильный ливневый дождь";
-"ragged shower rain" = "рваный дождь";
+"ragged shower rain" = "неровный дождь";
 
 "light snow" = "легкий снег";
 "Snow" = "снег";
@@ -55,10 +55,9 @@
 "clear sky" = "чистое небо";
 "few clouds" = "мало облаков";
 "scattered clouds" = "рассеянные облака";
-"broken clouds" = "разорванные облака";
+"broken clouds" = "прерывистые облака";
 "overcast clouds" = "пасмурные облака";
 
-"current weather" = "текущая погода";
 "Current weather" = "текущая погода";
 "Hourly weather" = "почасовая погода";
 "Daily weather" = "ежедневная погода";
@@ -87,3 +86,6 @@
 
 "Place not found" = "Место не найдено";
 "Weather conditions will worsen soon" = "Скоро погодные условия ухудшатся";
+"Refreshing" = "Обновление";
+"true" = "да";
+"false" = "нет";
