@@ -1,0 +1,88 @@
+/* 
+  Localizable.strings
+  home_work_23
+
+  Created by Natalia Drozd on 16.07.22.
+  
+*/
+
+
+"thunderstorm with light rain" = "гроза с небольшим дождем";
+"thunderstorm with rain" = "гроза с дождем";
+"thunderstorm with heavy rain" = "гроза с проливным дождем";
+"light thunderstorm" = "легкая гроза";
+"thunderstorm" = "гроза";
+"heavy thunderstorm" = "сильная гроза";
+"ragged thunderstorm" = "рваная гроза";
+"thunderstorm with light drizzle" = "гроза с мелким моросящим дождем";
+"thunderstorm with drizzle" = "гроза с моросью";
+"thunderstorm with heavy drizzle" = "гроза с сильным моросящим дождем";
+
+"light rain" = "легкий дождь";
+"moderate rain" = "умеренный дождь";
+"heavy intensity rain" = "сильный интенсивный дождь";
+"very heavy rain" = "очень сильный дождь";
+"extreme rain" = "экстремальный дождь";
+"freezing rain" = "холодный дождь";
+"light intensity shower rain" = "слабый ливневый дождь";
+"shower rain" = "ливневый дождь";
+"heavy intensity shower rain" = "сильный ливневый дождь";
+"ragged shower rain" = "рваный дождь";
+
+"light snow" = "легкий снег";
+"Snow" = "снег";
+"Heavy snow" = "сильный снегопад";
+"Sleet" = "мокрый снег";
+"Light shower sleet" = "легкий дождь с мокрым снегом";
+"Shower sleet" = "снежный дождь";
+"Light rain and snow" = "небольшой дождь и снег";
+"Rain and snow" = "дождь и снег";
+"Light shower snow" = "легкий ливневый снег";
+"Shower snow" = "снежный душ";
+"Heavy shower snow" = "сильный ливневый снег";
+
+"mist" = "туман";
+"Smoke" = "дым";
+"Haze" = "туман";
+"sand/ dust whirls" = "песочные/пылевые вихри";
+"fog" = "туман";
+"sand" = "песок";
+"dust" = "пыль";
+"volcanic ash" = "вулканический пепел";
+"squalls" = "шквалы";
+"tornado" = "торнадо";
+
+"clear sky" = "чистое небо";
+"few clouds" = "мало облаков";
+"scattered clouds" = "рассеянные облака";
+"broken clouds" = "разорванные облака";
+"overcast clouds" = "пасмурные облака";
+
+"current weather" = "текущая погода";
+"Current weather" = "текущая погода";
+"Hourly weather" = "почасовая погода";
+"Daily weather" = "ежедневная погода";
+"Weather on Map" = "погода на карте";
+"List all request" = "список всех запросов";
+
+"Min" = "Мин";
+"Max" = "Макс";
+
+"Sat" = "Сб";
+"Sun" = "Вск";
+"Mon" = "Пн";
+"Tue" = "Вт";
+"Wed" = "Ср";
+"Thu" = "Чт";
+"Fri" = "Пт";
+
+"Temperature" = "Температура";
+"Speed Wind" = "Скорость ветра";
+
+"Enter the name of the city" = "Введите название города";
+"Enter name" = "Введите название";
+
+"Ok" = "Ок";
+"Cancel" = "Закрыть";
+
+"Place not found" = "Место не найдено";

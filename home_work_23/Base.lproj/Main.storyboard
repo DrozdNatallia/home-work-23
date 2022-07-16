@@ -127,7 +127,7 @@
                         <viewLayoutGuide key="safeArea" id="2Dv-tA-avU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Weather on Map" id="01w-p3-gFj">
+                    <tabBarItem key="tabBarItem" title="Weather on Map" id="01w-p3-gFj" propertyAccessControl="localizable">
                         <imageReference key="image" image="map" catalog="system" symbolScale="large"/>
                     </tabBarItem>
                 </viewController>
