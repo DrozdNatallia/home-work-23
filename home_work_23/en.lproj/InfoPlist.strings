@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  home_work_23
+
+  Created by Natalia Drozd on 16.07.22.
+  
+*/
+
+"CFBundleDisplayName" = "Weather";
+"NSLocationWhenInUseUsageDescription" = "Description of usage";

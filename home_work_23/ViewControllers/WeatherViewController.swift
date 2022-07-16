@@ -196,7 +196,7 @@ class WeatherViewController: UIViewController {
     private func setWeatherNotifications(arrayTime: [Int]) {
         guard let time = arrayTime.first else {return}
         let content = UNMutableNotificationContent()
-        content.body = "Weather conditions will worsen soon"
+        content.body = NSLocalizedString("Weather conditions will worsen soon", comment: "")
         var date = DateComponents()
         date.hour = Int(time.convertUnix(formattedType: .hour))
         date.minute = Int(time.convertUnix(formattedType: .minutly))

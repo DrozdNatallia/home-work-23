@@ -33,6 +33,7 @@
 		CC8A47562867286400C427B3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8A47552867286400C427B3 /* Constants.swift */; };
 		CC8A475828672B1000C427B3 /* AlamofireProvaider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8A475728672B1000C427B3 /* AlamofireProvaider.swift */; };
 		CC8A475A2867557000C427B3 /* RestAPIProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8A47592867557000C427B3 /* RestAPIProviderProtocol.swift */; };
+		CC900B262882DD5700A9FCEE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC900B282882DD5700A9FCEE /* InfoPlist.strings */; };
 		CCA8EC5D286B02B4008DCF9E /* CurrentWeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA8EC5B286B02B4008DCF9E /* CurrentWeatherCell.swift */; };
 		CCA8EC5E286B02B4008DCF9E /* CurrentWeatherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCA8EC5C286B02B4008DCF9E /* CurrentWeatherCell.xib */; };
 		CCC3107E286C49C200A3B49C /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = CCC3107D286C49C200A3B49C /* Realm */; };
@@ -86,6 +87,8 @@
 		CC8A47552867286400C427B3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CC8A475728672B1000C427B3 /* AlamofireProvaider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireProvaider.swift; sourceTree = "<group>"; };
 		CC8A47592867557000C427B3 /* RestAPIProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestAPIProviderProtocol.swift; sourceTree = "<group>"; };
+		CC900B272882DD5700A9FCEE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CC900B292882DD5E00A9FCEE /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CCA8EC5B286B02B4008DCF9E /* CurrentWeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherCell.swift; sourceTree = "<group>"; };
 		CCA8EC5C286B02B4008DCF9E /* CurrentWeatherCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrentWeatherCell.xib; sourceTree = "<group>"; };
 		CCC31086286C5D7F00A3B49C /* RealmQueryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmQueryList.swift; sourceTree = "<group>"; };
@@ -218,6 +221,7 @@
 				CC54D5B6285F3846005A4942 /* Info.plist */,
 				CC54D5B1285F3846005A4942 /* Assets.xcassets */,
 				CC8953F228821D48004A1EDC /* Localizable.strings */,
+				CC900B282882DD5700A9FCEE /* InfoPlist.strings */,
 			);
 			path = home_work_23;
 			sourceTree = "<group>";
@@ -385,6 +389,7 @@
 				CC6C6B32287DDABC004A1DBD /* InfoWindow.xib in Resources */,
 				CCCEA638286B428C00E5CB0C /* DailyWeatherCell.xib in Resources */,
 				CC3064F4286CED1B00F66636 /* ListRequestTableCell.xib in Resources */,
+				CC900B262882DD5700A9FCEE /* InfoPlist.strings in Resources */,
 				CC54D5B0285F3844005A4942 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -499,6 +504,15 @@
 				CC8953F528821DF0004A1EDC /* ru */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		CC900B282882DD5700A9FCEE /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CC900B272882DD5700A9FCEE /* en */,
+				CC900B292882DD5E00A9FCEE /* ru */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
