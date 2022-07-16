@@ -166,6 +166,66 @@
             </objects>
             <point key="canvasLocation" x="164" y="-395"/>
         </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="iuv-wh-vfK">
+            <objects>
+                <viewController storyboardIdentifier="SettingsViewController" id="xVL-vh-exg" customClass="SettingsViewController" customModule="home_work_23" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="epM-wb-2Mw">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="IEi-bQ-otj">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="QB2-xS-bQw"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="QB2-xS-bQw" firstAttribute="trailing" secondItem="IEi-bQ-otj" secondAttribute="trailing" id="7Ck-Rs-JgH"/>
+                            <constraint firstItem="IEi-bQ-otj" firstAttribute="top" secondItem="QB2-xS-bQw" secondAttribute="top" id="gJ1-Nd-td2"/>
+                            <constraint firstItem="QB2-xS-bQw" firstAttribute="bottom" secondItem="IEi-bQ-otj" secondAttribute="bottom" id="jhK-NJ-hia"/>
+                            <constraint firstItem="IEi-bQ-otj" firstAttribute="leading" secondItem="QB2-xS-bQw" secondAttribute="leading" id="mZ4-lU-KeE"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="IEi-bQ-otj" id="MaH-th-qSn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tbB-jf-E0r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="952" y="-746"/>
+        </scene>
+        <!--Weather Conditional View Controller-->
+        <scene sceneID="YvZ-sB-U69">
+            <objects>
+                <viewController storyboardIdentifier="WeatherConditionalViewController" id="Vjk-SG-yk7" customClass="WeatherConditionalViewController" customModule="home_work_23" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="q1f-aH-kh5">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="DS0-Ne-xAf">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="2yd-Uc-c30"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="2yd-Uc-c30" firstAttribute="bottom" secondItem="DS0-Ne-xAf" secondAttribute="bottom" id="BJW-Ad-JpK"/>
+                            <constraint firstItem="DS0-Ne-xAf" firstAttribute="top" secondItem="2yd-Uc-c30" secondAttribute="top" id="J1F-Lr-9Lb"/>
+                            <constraint firstItem="DS0-Ne-xAf" firstAttribute="leading" secondItem="2yd-Uc-c30" secondAttribute="leading" id="fIf-0C-dxl"/>
+                            <constraint firstItem="2yd-Uc-c30" firstAttribute="trailing" secondItem="DS0-Ne-xAf" secondAttribute="trailing" id="plo-EC-Jdb"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="DS0-Ne-xAf" id="UUk-d6-bgY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IJb-5E-TPC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1671" y="-144"/>
+        </scene>
     </scenes>
     <resources>
         <image name="cloud" catalog="system" width="128" height="88"/>

@@ -30,7 +30,12 @@ class AlamofireProvaider: RestAPIProviderProtocol {
     }
     
     func getWeatherForCityCoordinates(lat: Double, lon: Double, completion: @escaping (Result<WeatherData, Error>) -> Void) {
-        let params = addParams(queryItems: ["lat": lat.description, "lon": lon.description, "exlcude":"minutely,alerts", "units" : "metric"])
+        var lang = "en"
+        if let preferredLanguage = Locale.preferredLanguages.first, preferredLanguage == "ru" {
+            lang = preferredLanguage
+        }
+        let params = addParams(queryItems: ["lat": lat.description, "lon": lon.description, "exlcude":"minutely,alerts", "units" : "metric", "lang" : lang])
+
         
         AF.request(Constants.weatherURL, method: .get, parameters: params).responseDecodable(of: WeatherData.self){ response in
             switch response.result {

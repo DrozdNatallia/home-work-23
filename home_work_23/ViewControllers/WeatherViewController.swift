@@ -80,6 +80,9 @@ class WeatherViewController: UIViewController {
         blurEffectView.isHidden = false
         activityIndicator.startAnimating()
         nameCity = "Minsk"
+        if Locale.preferredLanguages.first == "ru" {
+            nameCity = "Минск"
+        }
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "CurrentWeatherCell", bundle: nil), forCellReuseIdentifier: CurrentWeatherCell.key)
