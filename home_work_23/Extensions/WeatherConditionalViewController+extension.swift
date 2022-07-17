@@ -33,14 +33,11 @@ extension WeatherConditionalViewController: UITableViewDelegate, UITableViewData
         
         switch conditionalType(rawValue: indexPath.row){
         case .thuderstorm:
-            let value = defaults.bool(forKey: "thunderstorm") ? false : true
-            UserDefaults.standard.set(value, forKey: "thunderstorm")
+            UserDefaults.standard.set(!defaults.bool(forKey: "thunderstorm"), forKey: "thunderstorm")
         case.rain:
-            let value = defaults.bool(forKey: "rain") ? false : true
-            UserDefaults.standard.set(value, forKey: "rain")
+            UserDefaults.standard.set(!defaults.bool(forKey: "rain"), forKey: "rain")
         default:
-            let value = defaults.bool(forKey: "snow") ? false : true
-            UserDefaults.standard.set(value, forKey: "snow")
+            UserDefaults.standard.set(!defaults.bool(forKey: "snow"), forKey: "snow")
         }
         tableView.reloadData()
         notificationCenter.removeAllPendingNotificationRequests()
