@@ -119,11 +119,7 @@ extension WeatherViewController: CLLocationManagerDelegate {
 // MARK: TextField
 extension WeatherViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        var str = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"
-        if let preferredLanguage = Locale.preferredLanguages.first, preferredLanguage == "ru" {
-            str = "йцукенгшщзхъфывапролджэёячсмитьбюЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЁЯЧСМИТЬБЮ"
-        }
-        guard CharacterSet(charactersIn: str).isSuperset(of: CharacterSet(charactersIn: string)) || CharacterSet.whitespaces.isSuperset(of: CharacterSet(charactersIn: string)) || CharacterSet(charactersIn: "-").isSuperset(of: CharacterSet(charactersIn: string)) else {
+        guard CharacterSet.letters.isSuperset(of: CharacterSet(charactersIn: string)) || CharacterSet.whitespaces.isSuperset(of: CharacterSet(charactersIn: string)) || CharacterSet(charactersIn: "-").isSuperset(of: CharacterSet(charactersIn: string)) else {
             return false
         }
         return true

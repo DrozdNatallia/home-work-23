@@ -173,13 +173,17 @@ class WeatherViewController: UIViewController {
     
     // MARK: getCoordinatesByName
     fileprivate func getCoordinatesByName() {
-        guard var nameCity = nameCity else {return}
+        guard let nameCity = nameCity else {return}
+        var lang = "en"
+        if let preferredLanguage = Locale.preferredLanguages.first, preferredLanguage == "ru" {
+            lang = preferredLanguage
+        }
         apiProvider.getCoordinatesByName(name: nameCity) { [weak self] result in
             guard let self = self else {return}
             switch result {
             case .success(let value):
-                if let city = value.first {
-                    nameCity = city.name
+                if let city = value.first, let localName = city.localNames[lang] {
+                    self.nameCity = localName
                     self.getWeatherByCoordinates(cityLat: city.lat, cityLon: city.lon)
                 } else {
                     self.blurEffectView.isHidden = true
@@ -241,7 +245,8 @@ class WeatherViewController: UIViewController {
                     if let url = URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png") {
                         do {
                             let data = try Data(contentsOf: url)
-                            self.hourlyArrayImage.append(UIImage(data: data)!)
+                            guard let icon = UIImage(data: data) else {return}
+                            self.hourlyArrayImage.append(icon)
                         } catch _ {
                             print("error")
                         }
@@ -270,7 +275,8 @@ class WeatherViewController: UIViewController {
                     if let url = URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png") {
                         do {
                             let data = try Data(contentsOf: url)
-                            self.dailyImageArray.append(UIImage(data: data)!)
+                            guard let icon = UIImage(data: data) else {return}
+                            self.dailyImageArray.append(icon)
                         } catch _ {
                             print("error")
                         }
