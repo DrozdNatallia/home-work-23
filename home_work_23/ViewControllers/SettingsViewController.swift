@@ -8,7 +8,10 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
-
+    enum typeSettings: Int {
+        case conditionalWeatherlistRequest = 0
+        case listRequest
+    }
     @IBOutlet weak var tableView: UITableView!
     var arraySettings: [String]!
     override func viewDidLoad() {
@@ -36,5 +39,22 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         return UITableViewCell()
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch typeSettings(rawValue: indexPath.row) {
+        case .listRequest:
+            if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RealmListController") as? RealmListController {
+                
+                present(vc, animated: true)
+            }
+            
+        default:
+            if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WeatherConditionalViewController") as? WeatherConditionalViewController {
+              
+                present(vc, animated: true)
+                
+            }
+            
+        }
+    }
     
 }
