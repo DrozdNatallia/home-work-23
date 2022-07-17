@@ -1,14 +1,16 @@
 //
-//  WeatherConfitionalCell.swift
+//  WeatherConditionalCell.swift
 //  home_work_23
 //
-//  Created by Natalia Drozd on 16.07.22.
+//  Created by Natalia Drozd on 17.07.22.
 //
 
 import UIKit
 
-class WeatherConfitionalCell: UITableViewCell {
-    static let key = "WeatherConfitionalCell"
+class WeatherConditionalCell: UITableViewCell {
+    @IBOutlet weak var icon: UIImageView!
+    @IBOutlet weak var nameWeatherConditional: UILabel!
+    static let key = "WeatherConditionalCell"
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
