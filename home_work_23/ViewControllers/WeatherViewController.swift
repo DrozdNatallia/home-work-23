@@ -98,7 +98,7 @@ class WeatherViewController: UIViewController {
         refreshControl.tintColor = .white
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
 
-        
+        notificationCenter.removeAllPendingNotificationRequests()
         provaider = RealmProvader()
         apiProvider = AlamofireProvaider()
         
@@ -217,7 +217,6 @@ class WeatherViewController: UIViewController {
     }
     // MARK: getWeatherByCoordinates
     private func getWeatherByCoordinates(cityLat: Double, cityLon: Double) {
-        notificationCenter.removeAllPendingNotificationRequests()
         apiProvider.getWeatherForCityCoordinates(lat: cityLat, lon: cityLon) { [weak self] result in
             guard let self = self else {return}
             self.blurEffectView.isHidden = true
@@ -254,22 +253,16 @@ class WeatherViewController: UIViewController {
                     self.hourlyArrayDt.append(hourlyDt.convertUnix(formattedType: .hour))
                     self.hourlyArrayTemp.append(hourlyTemp)
                     
-                    if self.defaults.bool(forKey: "thunderstorm") {
-                        if thunderstorm.contains(weatherId) {
+                    if self.defaults.bool(forKey: "thunderstorm") && thunderstorm.contains(weatherId) {
                             self.hourlyArrayBadWeatherDt.append(hourlyDt - 60 * 30)
-                        }
                     }
         
-                    if self.defaults.bool(forKey: "rain") {
-                        if rain.contains(weatherId) {
+                    if self.defaults.bool(forKey: "rain") && rain.contains(weatherId) {
                             self.hourlyArrayBadWeatherDt.append(hourlyDt - 60 * 30)
-                        }
                     }
                     
-                    if self.defaults.bool(forKey: "snow"){
-                        if snow.contains(weatherId) {
+                    if self.defaults.bool(forKey: "snow") && snow.contains(weatherId) {
                             self.hourlyArrayBadWeatherDt.append(hourlyDt - 60 * 30)
-                        }
                     }
                 }
                 self.setWeatherNotifications(arrayTime: self.hourlyArrayBadWeatherDt)

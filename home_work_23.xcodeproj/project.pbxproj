@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		A80A51B2D6AE4A05D3E092F1 /* Pods_home_work_23.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F0F180ACDD77A75F4B010EF /* Pods_home_work_23.framework */; };
 		CC0F05CC2868815200A33DE0 /* WeatherViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F05CB2868815200A33DE0 /* WeatherViewController+Extension.swift */; };
+		CC261D162884BFB50025510F /* WeatherConditionalViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC261D152884BFB50025510F /* WeatherConditionalViewController+extension.swift */; };
+		CC261D182884C0190025510F /* SettingsViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC261D172884C0190025510F /* SettingsViewController+extension.swift */; };
 		CC27E364287DF8A900720830 /* ModeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC27E363287DF8A900720830 /* ModeType.swift */; };
 		CC27E366287DF93200720830 /* ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC27E365287DF93200720830 /* ContentType.swift */; };
 		CC304850286365EF004DF315 /* InfoCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC30484F286365EF004DF315 /* InfoCity.swift */; };
@@ -65,6 +67,8 @@
 		574E34DB2A4E3A9B2AD5046F /* Pods-home_work_23.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-home_work_23.debug.xcconfig"; path = "Target Support Files/Pods-home_work_23/Pods-home_work_23.debug.xcconfig"; sourceTree = "<group>"; };
 		5F0F180ACDD77A75F4B010EF /* Pods_home_work_23.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_home_work_23.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC0F05CB2868815200A33DE0 /* WeatherViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherViewController+Extension.swift"; sourceTree = "<group>"; };
+		CC261D152884BFB50025510F /* WeatherConditionalViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherConditionalViewController+extension.swift"; sourceTree = "<group>"; };
+		CC261D172884C0190025510F /* SettingsViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsViewController+extension.swift"; sourceTree = "<group>"; };
 		CC27E363287DF8A900720830 /* ModeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeType.swift; sourceTree = "<group>"; };
 		CC27E365287DF93200720830 /* ContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentType.swift; sourceTree = "<group>"; };
 		CC30484F286365EF004DF315 /* InfoCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCity.swift; sourceTree = "<group>"; };
@@ -198,6 +202,8 @@
 				CCD72148286DC2D10043B636 /* Int+Extension.swift */,
 				CCDD00DC286D01C200CE8582 /* RealmListController+Extension.swift */,
 				CCDD00DE286D021200CE8582 /* HourlyWeatherCell+Extension.swift */,
+				CC261D152884BFB50025510F /* WeatherConditionalViewController+extension.swift */,
+				CC261D172884C0190025510F /* SettingsViewController+extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -482,6 +488,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCD72145286DB6160043B636 /* RealmProviderProtocol.swift in Sources */,
+				CC261D182884C0190025510F /* SettingsViewController+extension.swift in Sources */,
 				CCD63DE028840CBB0011FC12 /* WeatherConditionalCell.swift in Sources */,
 				CC5BEC5428675E1700A0237C /* MapViewController.swift in Sources */,
 				CC954CE928832C19006AB565 /* WeatherConditionalViewController.swift in Sources */,
@@ -501,6 +508,7 @@
 				CCDD00E2286D03A100CE8582 /* RealmCurrentWeather.swift in Sources */,
 				CC471716286875D200122832 /* MapViewControllers+Extension.swift in Sources */,
 				CCC31087286C5D7F00A3B49C /* RealmQueryList.swift in Sources */,
+				CC261D162884BFB50025510F /* WeatherConditionalViewController+extension.swift in Sources */,
 				CC954CE628832511006AB565 /* SettingsCells.swift in Sources */,
 				CC8A475828672B1000C427B3 /* AlamofireProvaider.swift in Sources */,
 				CCD72149286DC2D10043B636 /* Int+Extension.swift in Sources */,
