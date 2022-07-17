@@ -27,4 +27,10 @@
 "Refreshing" = "Обновление";
 "true" = "да";
 "false" = "нет";
-//"en" = "ru"
+
+"thunderstorm" = "гроза";
+"rain" = "дождь";
+"snow" = "снег";
+
+"Choice weather conditional" = "Выбор погодных условий";
+"History request" = "История запросов";

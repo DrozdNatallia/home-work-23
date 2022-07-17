@@ -16,7 +16,7 @@ class SettingsViewController: UIViewController {
     var arraySettings: [String]!
     override func viewDidLoad() {
         super.viewDidLoad()
-        arraySettings = ["Choice weather conditional", "List all request"]
+        arraySettings = ["Choice weather conditional", "History request"]
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -33,7 +33,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: SettingsCells.key) as? SettingsCells {
-            cell.settingName.text = arraySettings[indexPath.row]
+            cell.settingName.text = NSLocalizedString(arraySettings[indexPath.row], comment: "")
             return cell
         }
         return UITableViewCell()

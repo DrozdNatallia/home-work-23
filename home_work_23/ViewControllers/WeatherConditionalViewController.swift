@@ -33,7 +33,7 @@ extension WeatherConditionalViewController: UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: WeatherConditionalCell.key) as? WeatherConditionalCell {
-            cell.nameWeatherConditional.text = weatherConditional[indexPath.row]
+            cell.nameWeatherConditional.text = NSLocalizedString(weatherConditional[indexPath.row], comment: "")
             switch conditionalType(rawValue: indexPath.row) {
             case .thuderstorm:
                 if defaults.bool(forKey: "thunderstorm") {

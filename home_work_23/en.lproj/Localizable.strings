@@ -26,3 +26,10 @@
 "Refreshing" = "Refreshing";
 "true" = "true";
 "false" = "false";
+
+"thunderstorm" = "thunderstorm";
+"rain" = "rain";
+"snow" = "snow";
+
+"Choice weather conditional" = "Choice weather conditional";
+"History request" = "History request";
