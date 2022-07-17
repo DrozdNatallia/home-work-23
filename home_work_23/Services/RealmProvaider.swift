@@ -30,11 +30,12 @@ class RealmProvader: RealmProviderProtocol {
         writeObjectToDatabase(name: newRequest)
     }
     
-    func setCurrentWeatherQueryList(temp: Double, weather: String, time: Int){
+    func setCurrentWeatherQueryList(temp: Double, weather: String, time: Int, isCurrentWeather: Bool){
         let newRequest = RealmCurrentWeather()
         newRequest.temp = temp
         newRequest.weatherDescription = weather
         newRequest.time = time
+        newRequest.isCurrentWeather = isCurrentWeather
         writeObjectToDatabase(name: newRequest)
     }
 }

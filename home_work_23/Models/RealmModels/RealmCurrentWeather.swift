@@ -12,4 +12,5 @@ class RealmCurrentWeather: Object {
     @objc dynamic var temp: Double = 0.0
     @objc dynamic var weatherDescription: String = ""
     @objc dynamic var time: Int = 0
+    @objc dynamic var isCurrentWeather: Bool = true
 }

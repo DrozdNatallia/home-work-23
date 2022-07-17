@@ -13,5 +13,5 @@ protocol RealmProviderProtocol {
     func getResult<T: RealmFetchable>(nameObject: T.Type) -> Results<T>
     func writeObjectToDatabase(name: Object) -> Void
     func setQueryList(lat: Double, lon: Double, time: Int)
-    func setCurrentWeatherQueryList(temp: Double, weather: String, time: Int)
+    func setCurrentWeatherQueryList(temp: Double, weather: String, time: Int, isCurrentWeather: Bool)
 }

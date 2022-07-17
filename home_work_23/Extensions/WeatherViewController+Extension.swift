@@ -34,7 +34,7 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.nameCity.text = nameCity
                 cell.currentTemp.text = "\(Int(temp))°"
                 cell.currentClouds.text = clouds
-                cell.currentMaxMinTemp.text = "Min: \(Int(minTemp))°, Max: \(Int(maxTemp))°"
+                cell.currentMaxMinTemp.text = "\(NSLocalizedString("Min", comment: "")): \(Int(minTemp))°, \(NSLocalizedString("Max", comment: "")): \(Int(maxTemp))°"
                 return cell
             }
         case .hourly:
@@ -53,9 +53,9 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.contentView.backgroundColor = UIColor.clear
                 cell.layer.backgroundColor = UIColor.clear.cgColor
                 cell.backgroundColor = .clear
-                cell.days.text = "\(dailyArrayDt[indexPath.row])"
-                cell.minTemp.text = "Min: \(Int(dailyArrayMinTemp[indexPath.row]))°"
-                cell.maxTemp.text = "Max: \(Int(dailyMaxTempArray[indexPath.row]))°"
+                cell.days.text = NSLocalizedString(dailyArrayDt[indexPath.row], comment: "")
+                cell.minTemp.text = "\(NSLocalizedString("Min", comment: "")): \(Int(dailyArrayMinTemp[indexPath.row]))°"
+                cell.maxTemp.text = "\(NSLocalizedString("Max", comment: "")): \(Int(dailyMaxTempArray[indexPath.row]))°"
                 cell.icon.image = dailyImageArray[indexPath.row]
                 return cell
             }
@@ -67,11 +67,11 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
         let key = ContentType(rawValue: section)
         switch key {
         case .daily:
-            return ContentType.daily.description
+            return NSLocalizedString(ContentType.daily.description, comment: "")
         case .hourly:
-            return ContentType.hourly.description
+            return NSLocalizedString(ContentType.hourly.description, comment: "")
         case.current:
-            return ContentType.current.description
+            return NSLocalizedString(ContentType.current.description, comment: "")
         default:
             return ""
         }
@@ -114,5 +114,15 @@ extension WeatherViewController: CLLocationManagerDelegate {
             getWeatherByLocation()
         }
         
+    }
+}
+// MARK: TextField
+extension WeatherViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard CharacterSet.letters.isSuperset(of: CharacterSet(charactersIn: string)) || CharacterSet.whitespaces.isSuperset(of: CharacterSet(charactersIn: string)) || CharacterSet(charactersIn: "-").isSuperset(of: CharacterSet(charactersIn: string)) else {
+            return false
+        }
+        return true
+
     }
 }

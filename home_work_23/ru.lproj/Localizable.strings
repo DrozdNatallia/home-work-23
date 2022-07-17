@@ -1,0 +1,30 @@
+/* 
+  Localizable.strings
+  home_work_23
+
+  Created by Natalia Drozd on 16.07.22.
+  
+*/
+
+"Current weather" = "текущая погода";
+"Hourly weather" = "почасовая погода";
+"Daily weather" = "ежедневная погода";
+
+"Min" = "Мин";
+"Max" = "Макс";
+
+"Temperature" = "Температура";
+"Speed Wind" = "Скорость ветра";
+
+"Enter the name of the city" = "Введите название города";
+"Enter name" = "Введите название";
+
+"Ok" = "Ок";
+"Cancel" = "Закрыть";
+
+"Place not found" = "Место не найдено";
+"Weather conditions will worsen soon" = "Скоро погодные условия ухудшатся";
+"Refreshing" = "Обновление";
+"true" = "да";
+"false" = "нет";
+//"en" = "ru"

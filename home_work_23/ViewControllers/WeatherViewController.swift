@@ -80,6 +80,9 @@ class WeatherViewController: UIViewController {
         blurEffectView.isHidden = false
         activityIndicator.startAnimating()
         nameCity = "Minsk"
+        if Locale.preferredLanguages.first == "ru" {
+            nameCity = "Минск"
+        }
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "CurrentWeatherCell", bundle: nil), forCellReuseIdentifier: CurrentWeatherCell.key)
@@ -91,7 +94,7 @@ class WeatherViewController: UIViewController {
         
         refreshControl = UIRefreshControl()
         tableView.refreshControl = refreshControl
-        refreshControl.attributedTitle = NSAttributedString(string: "Refreshing", attributes: [.foregroundColor: UIColor.white])
+        refreshControl.attributedTitle = NSAttributedString(string: NSLocalizedString("Refreshing", comment: ""), attributes: [.foregroundColor: UIColor.white])
         refreshControl.tintColor = .white
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         
@@ -144,14 +147,15 @@ class WeatherViewController: UIViewController {
     @IBAction func onSearchButton(_ sender: Any) {
         UserDefaults.standard.set(true, forKey: "isNone")
         selectionMode = .selectionCity
-        let alert = UIAlertController(title: "Enter the name of the city", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: NSLocalizedString("Enter the name of the city", comment: ""), message: nil, preferredStyle: .alert)
         
         alert.addTextField { textField in
-            textField.placeholder = "Enter name"
+            textField.delegate = self
+            textField.placeholder = NSLocalizedString("Enter name", comment: "")
             self.newNameCity = textField
         }
         
-        let okButton = UIAlertAction(title: "Ok", style: .default) { [weak self] _ in
+        let okButton = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { [weak self] _ in
             guard let self = self else {return}
             guard let newName = self.newNameCity.text else {return}
             UserDefaults.standard.set(newName, forKey: "city")
@@ -160,7 +164,7 @@ class WeatherViewController: UIViewController {
             self.activityIndicator.startAnimating()
             self.getCoordinatesByName()
         }
-        let cancelButton = UIAlertAction(title: "Cancel", style: .destructive)
+        let cancelButton = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive)
         alert.addAction(okButton)
         alert.addAction(cancelButton)
         present(alert, animated: true)
@@ -169,19 +173,23 @@ class WeatherViewController: UIViewController {
     
     // MARK: getCoordinatesByName
     fileprivate func getCoordinatesByName() {
-        guard var nameCity = nameCity else {return}
+        guard let nameCity = nameCity else {return}
+        var lang = "en"
+        if let preferredLanguage = Locale.preferredLanguages.first, preferredLanguage == "ru" {
+            lang = preferredLanguage
+        }
         apiProvider.getCoordinatesByName(name: nameCity) { [weak self] result in
             guard let self = self else {return}
             switch result {
             case .success(let value):
-                if let city = value.first {
-                    nameCity = city.name
+                if let city = value.first, let localName = city.localNames[lang] {
+                    self.nameCity = localName
                     self.getWeatherByCoordinates(cityLat: city.lat, cityLon: city.lon)
                 } else {
                     self.blurEffectView.isHidden = true
                     self.activityIndicator.stopAnimating()
-                    let errorAlert = UIAlertController(title: "Place not found", message: nil, preferredStyle: .alert)
-                    let okButton = UIAlertAction(title: "Ok", style: .cancel) { _ in
+                    let errorAlert = UIAlertController(title: NSLocalizedString("Place not found", comment: ""), message: nil, preferredStyle: .alert)
+                    let okButton = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .cancel) { _ in
                     }
                     errorAlert.addAction(okButton)
                     self.present(errorAlert, animated: true)
@@ -195,7 +203,7 @@ class WeatherViewController: UIViewController {
     private func setWeatherNotifications(arrayTime: [Int]) {
         guard let time = arrayTime.first else {return}
         let content = UNMutableNotificationContent()
-        content.body = "Weather conditions will worsen soon"
+        content.body = NSLocalizedString("Weather conditions will worsen soon", comment: "")
         var date = DateComponents()
         date.hour = Int(time.convertUnix(formattedType: .hour))
         date.minute = Int(time.convertUnix(formattedType: .minutly))
@@ -220,7 +228,7 @@ class WeatherViewController: UIViewController {
                 self.temp = temp
                 self.currentClouds = clouds
                 let date = Int(Date().timeIntervalSince1970)
-                self.provaider.setCurrentWeatherQueryList(temp: temp, weather: clouds, time: date)
+                self.provaider.setCurrentWeatherQueryList(temp: temp, weather: clouds, time: date, isCurrentWeather: true)
                 self.provaider.setQueryList(lat: lat, lon: lon, time: date)
                 
                 // MARK: Hourly
@@ -237,7 +245,8 @@ class WeatherViewController: UIViewController {
                     if let url = URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png") {
                         do {
                             let data = try Data(contentsOf: url)
-                            self.hourlyArrayImage.append(UIImage(data: data)!)
+                            guard let icon = UIImage(data: data) else {return}
+                            self.hourlyArrayImage.append(icon)
                         } catch _ {
                             print("error")
                         }
@@ -266,7 +275,8 @@ class WeatherViewController: UIViewController {
                     if let url = URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png") {
                         do {
                             let data = try Data(contentsOf: url)
-                            self.dailyImageArray.append(UIImage(data: data)!)
+                            guard let icon = UIImage(data: data) else {return}
+                            self.dailyImageArray.append(icon)
                         } catch _ {
                             print("error")
                         }

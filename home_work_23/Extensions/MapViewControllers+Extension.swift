@@ -19,9 +19,9 @@ extension MapViewController: GMSMapViewDelegate {
             guard let temp = temp, let imageWeather = imageWeather, let speedWind = speedWind else {
                 return UIView()
             }
-            view.temp.text = "Temperature: \(temp)°"
+            view.temp.text = "\(NSLocalizedString("Temperature", comment: "")): \(temp)°"
             view.icon.image = imageWeather
-            view.windSpeed.text = "Speed Wind: \(Int(speedWind)) m/s"
+            view.windSpeed.text = "\(NSLocalizedString("Speed Wind", comment: "")): \(Int(speedWind)) m/s"
             return view
         }
         return UIView()

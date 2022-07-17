@@ -24,6 +24,7 @@ extension RealmListController: UITableViewDelegate, UITableViewDataSource {
             cell.time.text = info.time.convertUnix(formattedType: .fullTime)
             cell.temp.text = currentWeather.temp.description
             cell.weatherDescription.text = currentWeather.weatherDescription
+            cell.isCurrentWeather.text = NSLocalizedString(currentWeather.isCurrentWeather.description, comment: "")
             return cell
         }
         return UITableViewCell()

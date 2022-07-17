@@ -13,6 +13,7 @@ class ListRequestTableCell: UITableViewCell {
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var temp: UILabel!
     @IBOutlet weak var weatherDescription: UILabel!
+    @IBOutlet weak var isCurrentWeather: UILabel!
     static let key = "ListRequestTableCell"
     override func awakeFromNib() {
         super.awakeFromNib()

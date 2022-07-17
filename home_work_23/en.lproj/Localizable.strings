@@ -1,0 +1,28 @@
+/* 
+  Localizable.strings
+  home_work_23
+
+  Created by Natalia Drozd on 16.07.22.
+  
+*/
+"Current weather" = "Current weather";
+"Hourly weather" = "Hourly weather";
+"Daily weather" = "Daily weather";
+
+"Min" = "Min";
+"Max" = "Max";
+
+"Temperature" = "Temperature";
+"Speed Wind" = "Speed Wind";
+
+"Enter the name of the city" = "Enter the name of the city";
+"Enter name" = "Enter name";
+
+"Ok" = "Ok";
+"Cancel" = "Cancel";
+
+"Place not found" = "Place not found";
+"Weather conditions will worsen soon" = "Weather conditions will worsen soon";
+"Refreshing" = "Refreshing";
+"true" = "true";
+"false" = "false";
