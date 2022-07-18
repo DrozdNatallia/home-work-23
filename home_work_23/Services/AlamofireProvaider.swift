@@ -9,7 +9,6 @@ import Foundation
 import Alamofire
 
 class AlamofireProvaider: RestAPIProviderProtocol {
-    
     var key: String? {
         get {
             Bundle.main.infoDictionary?["API_KEY"] as? String
@@ -34,7 +33,12 @@ class AlamofireProvaider: RestAPIProviderProtocol {
         if let preferredLanguage = Locale.preferredLanguages.first, preferredLanguage == "ru" {
             lang = preferredLanguage
         }
-        let params = addParams(queryItems: ["lat": lat.description, "lon": lon.description, "exlcude":"minutely,alerts", "units" : "metric", "lang" : lang])
+        let defaults = UserDefaults()
+        var system = "imperial"
+        if defaults.bool(forKey: "isMetric") {
+            system = "metric"
+        }
+        let params = addParams(queryItems: ["lat": lat.description, "lon": lon.description, "exlcude":"minutely,alerts", "units" : system, "lang" : lang])
 
         
         AF.request(Constants.weatherURL, method: .get, parameters: params).responseDecodable(of: WeatherData.self){ response in

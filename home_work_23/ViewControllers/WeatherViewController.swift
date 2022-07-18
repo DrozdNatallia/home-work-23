@@ -97,9 +97,8 @@ class WeatherViewController: UIViewController {
         refreshControl.attributedTitle = NSAttributedString(string: NSLocalizedString("Refreshing", comment: ""), attributes: [.foregroundColor: UIColor.white])
         refreshControl.tintColor = .white
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        
+
         notificationCenter.removeAllPendingNotificationRequests()
-        
         provaider = RealmProvader()
         apiProvider = AlamofireProvaider()
         
@@ -205,7 +204,7 @@ class WeatherViewController: UIViewController {
         let content = UNMutableNotificationContent()
         content.body = NSLocalizedString("Weather conditions will worsen soon", comment: "")
         var date = DateComponents()
-        date.hour = Int(time.convertUnix(formattedType: .hour))
+        date.hour = Int(time.convertUnix(formattedType: .hourSecondType))
         date.minute = Int(time.convertUnix(formattedType: .minutly))
         let calendarTrigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: false)
         let indentifier = String(time)
@@ -251,13 +250,19 @@ class WeatherViewController: UIViewController {
                             print("error")
                         }
                     }
-                    self.hourlyArrayDt.append(hourlyDt.convertUnix(formattedType: .hour))
+                    self.hourlyArrayDt.append(hourlyDt.convertUnix(formattedType: self.defaults.bool(forKey: "dateFormat") ? .hourFirstType : .hourSecondType))
                     self.hourlyArrayTemp.append(hourlyTemp)
-                    self.hourlyArrayBadWeatherId.append(weatherId)
                     
-                    if snow.contains(weatherId) || rain.contains(weatherId) || thunderstorm.contains(weatherId) {
-                        self.hourlyArrayBadWeatherDt.removeAll()
-                        self.hourlyArrayBadWeatherDt.append(hourlyDt - 60 * 30)
+                    if self.defaults.bool(forKey: "thunderstorm") && thunderstorm.contains(weatherId) {
+                            self.hourlyArrayBadWeatherDt.append(hourlyDt - 60 * 30)
+                    }
+        
+                    if self.defaults.bool(forKey: "rain") && rain.contains(weatherId) {
+                            self.hourlyArrayBadWeatherDt.append(hourlyDt - 60 * 30)
+                    }
+                    
+                    if self.defaults.bool(forKey: "snow") && snow.contains(weatherId) {
+                            self.hourlyArrayBadWeatherDt.append(hourlyDt - 60 * 30)
                     }
                 }
                 self.setWeatherNotifications(arrayTime: self.hourlyArrayBadWeatherDt)
