@@ -204,7 +204,7 @@ class WeatherViewController: UIViewController {
         let content = UNMutableNotificationContent()
         content.body = NSLocalizedString("Weather conditions will worsen soon", comment: "")
         var date = DateComponents()
-        date.hour = Int(time.convertUnix(formattedType: .hour))
+        date.hour = Int(time.convertUnix(formattedType: .hourSecondType))
         date.minute = Int(time.convertUnix(formattedType: .minutly))
         let calendarTrigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: false)
         let indentifier = String(time)
@@ -250,7 +250,7 @@ class WeatherViewController: UIViewController {
                             print("error")
                         }
                     }
-                    self.hourlyArrayDt.append(hourlyDt.convertUnix(formattedType: .hour))
+                    self.hourlyArrayDt.append(hourlyDt.convertUnix(formattedType: self.defaults.bool(forKey: "dateFormat") ? .hourFirstType : .hourSecondType))
                     self.hourlyArrayTemp.append(hourlyTemp)
                     
                     if self.defaults.bool(forKey: "thunderstorm") && thunderstorm.contains(weatherId) {

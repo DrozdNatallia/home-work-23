@@ -28,6 +28,16 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 present(vc, animated: true)
             }
+        case .dateFormat:
+            if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DateViewController") as? DateViewController {
+                
+                present(vc, animated: true)
+            }
+        case .system:
+            if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SystemViewController") as? SystemViewController {
+                
+                present(vc, animated: true)
+            }
             
         default:
             if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WeatherConditionalViewController") as? WeatherConditionalViewController {
